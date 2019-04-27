@@ -1,0 +1,20 @@
+# I'm tired of seeing all these as untracked files
+
+# Vim files
+.*.sw[a-p]
+Session.vim
+.*.un~
+
+# Auxiliary files
+*.aux
+*.idx
+*.log
+*.toc
+*.run.xml
+
+# Generated files (output)
+*.cls
+*.pdf
+
+# might upload to CTAN someday
+pkg/*
