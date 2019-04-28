@@ -233,18 +233,13 @@
 % \subsection{Page layout}
 % \label{sec:page_layout}
 %
-% \subsubsection{Paper size}
-% \label{sec:paper_size}
-%
 % The MLA uses standard ``letter-size'' paper, and that's almost
 % all we have in America anyway.
 % The paper size was already set to letter when loading the
 % \Dclass{article} class in section~\ref{sec:introduction}.
 %
-% \subsubsection{Margins}
-% \label{sec:margins}
-%
-% The MLA prescribes uniform one-inch margins on said letter-size paper.
+% Furthermore,
+% the MLA prescribes uniform one-inch margins on said letter-size paper.
 % This is taken care of with the \Dpkg{fullpage} package loaded in
 % section~\ref{sec:loading_packages}.  The \cs{textheight} and \cs{textwidth}
 % definitions are here just for good measure.
@@ -353,24 +348,15 @@
 % \subsection{Sectioning}
 % \label{sec:sectioning}
 %
-% \subsubsection{Counters}
-% \label{sec:counters}
-%
 % Customary section headers are rather straightforward and only consist of
 % the section number in Arabic numerals, a space and the section name,
 % flush left.
-%
-% For any given counter \Dctr{CTR}, \cs{theCTR} is a macro which
-% defines the printable version of counter \Dctr{CTR}.
 %
 %    \begin{macrocode}
 \renewcommand{\thesection}{\@arabic\c@section}
 \renewcommand{\thesubsection}{\thesection.\@arabic\c@subsection}
 \renewcommand{\thesubsubsection}{\thesubsection.\@arabic\c@subsubsection}
 %    \end{macrocode}
-%
-% \subsubsection{Commands}
-% \label{sec:commands}
 %
 % Un-fancifying the section headers is acheived using the
 % \Dpkg{titlesec} package.
