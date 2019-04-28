@@ -171,7 +171,6 @@
 % \subsection{Line spacing and breaking}
 % \label{sec:line_breaking}
 %
-% \begin{macro}{\linespread}
 % The MLA prescribes perfect double-spacing, but \LaTeX\ does it
 % a little \emph{too} perfect, putting one less line of text on the
 % paper than expected from the ``industry standard'', Microsoft Word.
@@ -179,25 +178,17 @@
 %    \begin{macrocode}
 \linespread{1.99}
 %    \end{macrocode}
-% \end{macro}
 %
-% \begin{macro}{\hyphenpenalty}
-% \begin{macro}{\pretolerance}
 % To further adhere to the MLA style guide, we'll forego all hyphenation
 % and allow weird line breaks and uncanny whitespace.
 %    \begin{macrocode}
 \hyphenpenalty 10000
 \pretolerance 10000
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
 %
 % \subsection{Paragraphing}
 % \label{sec:paragraphing}
 %
-% \begin{macro}{\parindent}
-% \begin{macro}{\parskip}
-% \begin{macro}{\topsep}
 % MLA prescribes half-inch indents on the first line of each paragraph
 % with no spaces in between.
 % (Some professors will request you separate sections of lengthy papers,
@@ -208,13 +199,7 @@
 \setlength{\parskip}{0em}
 \setlength{\topsep}{0em}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
-% \begin{macro}{\widowpenalty}
-% \begin{macro}{\clubpenalty}
-% \begin{macro}{\interlinepenalty}
 % MLA also cares more about consistent page count than beautiful typesetting.
 % So, we'll accept our fate and allow orphans and widows for the sake of
 % uniform line count.
@@ -223,17 +208,12 @@
 \clubpenalty 0
 \interlinepenalty 0
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
-% \begin{macro}{\RaggedRightParindent}
 % We also want flush-left ragged lines.
 % (This is acheived with the \Dpkg{ragged2e} package.)
 %    \begin{macrocode}
 \RaggedRight
 %    \end{macrocode}
-% \end{macro}
 %
 % \begin{environment}{noindent}
 % The \Denv{noindent} environment works a little wonky when working with
@@ -336,11 +316,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@title}
-% \begin{macro}{\@author}
-% \begin{macro}{\@professor}
-% \begin{macro}{\@course}
-% \begin{macro}{\@date}
 % We make sure the internal macros used to store the above information
 % are empty, lest something weird happen.  \cs{date}, however,
 % is generally set to the current date.
@@ -351,11 +326,6 @@
 \course{}
 \date{\today}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
 % \begin{macro}{\makemlaheader}
 % This command prints out the standard five-line MLA header,
@@ -390,9 +360,6 @@
 % the section number in Arabic numerals, a space and the section name,
 % flush left.
 %
-% \begin{macro}{\thesection}
-% \begin{macro}{\thesubsection}
-% \begin{macro}{\thesubsubsection}
 % For any given counter \Dctr{CTR}, \cs{theCTR} is a macro which
 % defines the printable version of counter \Dctr{CTR}.
 %
@@ -401,9 +368,6 @@
 \renewcommand{\thesubsection}{\thesection.\@arabic\c@subsection}
 \renewcommand{\thesubsubsection}{\thesubsection.\@arabic\c@subsubsection}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
 % \subsubsection{Commands}
 % \label{sec:commands}
