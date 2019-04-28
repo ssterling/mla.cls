@@ -18,6 +18,12 @@
 %
 % \section{Identification}
 %
+% For the \textsf{driver} code:
+%
+%<*driver>
+\ProvidesFile{mla.dtx}
+%</driver>
+%
 % The \Dclass{mla} class has only been tested with \LaTeXe ,
 % so we will make sure it doesn't get included in something else:
 %    \begin{macrocode}
@@ -26,7 +32,7 @@
 % 
 % Announce the class name and its version:
 %    \begin{macrocode}
-%<mla>\ProvidesClass{mla}[2019/04/22 v2 MLA Paper Class]
+%<mla>\ProvidesClass{mla}[2019/04/22 v0.1 MLA Paper Class]
 %    \end{macrocode}
 %
 % \subsection{Documentation driver}
@@ -37,7 +43,6 @@
 %    \begin{macrocode}
 %<*driver>
 \documentclass{ltxdoc}
-\GetFileInfo{mla.cls}
 \AtBeginDocument{\CodelineIndex\EnableCrossrefs}
 \AtEndDocument{\PrintIndex}
 
@@ -49,6 +54,9 @@
 \newcommand*{\Dpkg}[1]{\textsf{#1}}
 \newcommand*{\Denv}[1]{\textsf{#1}}
 
+% Needed for the appendix
+\usepackage{verbatim}
+
 \begin{document}
 \DocInput{mla.dtx}
 \end{document}
@@ -56,18 +64,53 @@
 %    \end{macrocode}
 % \fi
 %
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \GetFileInfo{mla.dtx}
+%
 % \title{The \Dclass{mla} class\thanks{This document corresponds to
 %        \Dclass{mla}~\fileversion, dated \filedate.}}
 % \author{Seth Price \\ \texttt{ssterling@firemail.cc}}
-%
 % \date{\filedate}
+%
 % \maketitle
+%
+% \begin{abstract}
+% Whilst the \TeX\ family of programs is widely used in the sciences
+% and academia overall, there seems to be a lack of support for
+% the humanities, which commonly adhere to MLA format for
+% student papers and reports.
+%
+% Though there \emph{are} MLA-style packages available,
+% none met the expectations of the author (who was mostly
+% just nit-picky about elegance in code).
+% So \textit{voil\`a}, there now exists a proper \Dfile{mla.cls}:
+% a simple, straightforward class for composing papers
+% almost perfectly adherent to the MLA style guide.
+% \end{abstract}
+%
 % \tableofcontents
 %
 % \StopEventually{} ^^A
 %
-% \section{Introduction}
-% \label{sec:introduction}
+% \section{Initial code}
+% \label{sec:initial_code}
 %
 % The \Dclass{mla} class is based off the \Dclass{article} class,
 % so common macros such as \cs{textit} or \cs{figure} are
@@ -146,14 +189,13 @@
 % The \Dpkg{times} package was already loaded in
 % section~\ref{sec:loading_packages}, and the font size was set to
 % 12pt when loading the \Dclass{article} class in
-% section~\ref{sec:introduction}.
+% section~\ref{sec:initial_code}.
 % This should be metric-compatible with the infamous Times New Roman,
 % the \textit{de facto} standard of the MLA format.
 %
 % \subsection{Line spacing and breaking}
 % \label{sec:line_breaking}
 %
-% \begin{macro}{\linespread}
 % The MLA prescribes perfect double-spacing, but \LaTeX\ does it
 % a little \emph{too} perfect, putting one less line of text on the
 % paper than expected from the ``industry standard'', Microsoft Word.
@@ -161,25 +203,17 @@
 %    \begin{macrocode}
 \linespread{1.99}
 %    \end{macrocode}
-% \end{macro}
 %
-% \begin{macro}{\hyphenpenalty}
-% \begin{macro}{\pretolerance}
 % To further adhere to the MLA style guide, we'll forego all hyphenation
 % and allow weird line breaks and uncanny whitespace.
 %    \begin{macrocode}
 \hyphenpenalty 10000
 \pretolerance 10000
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
 %
 % \subsection{Paragraphing}
 % \label{sec:paragraphing}
 %
-% \begin{macro}{\parindent}
-% \begin{macro}{\parskip}
-% \begin{macro}{\topsep}
 % MLA prescribes half-inch indents on the first line of each paragraph
 % with no spaces in between.
 % (Some professors will request you separate sections of lengthy papers,
@@ -190,13 +224,7 @@
 \setlength{\parskip}{0em}
 \setlength{\topsep}{0em}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
-% \begin{macro}{\widowpenalty}
-% \begin{macro}{\clubpenalty}
-% \begin{macro}{\interlinepenalty}
 % MLA also cares more about consistent page count than beautiful typesetting.
 % So, we'll accept our fate and allow orphans and widows for the sake of
 % uniform line count.
@@ -205,17 +233,12 @@
 \clubpenalty 0
 \interlinepenalty 0
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
-% \begin{macro}{\RaggedRightParindent}
 % We also want flush-left ragged lines.
 % (This is acheived with the \Dpkg{ragged2e} package.)
 %    \begin{macrocode}
 \RaggedRight
 %    \end{macrocode}
-% \end{macro}
 %
 % \begin{environment}{noindent}
 % The \Denv{noindent} environment works a little wonky when working with
@@ -235,18 +258,13 @@
 % \subsection{Page layout}
 % \label{sec:page_layout}
 %
-% \subsubsection{Paper size}
-% \label{sec:paper_size}
-%
 % The MLA uses standard ``letter-size'' paper, and that's almost
 % all we have in America anyway.
 % The paper size was already set to letter when loading the
-% \Dclass{article} class in section~\ref{sec:introduction}.
+% \Dclass{article} class in section~\ref{sec:initial_code}.
 %
-% \subsubsection{Margins}
-% \label{sec:margins}
-%
-% The MLA prescribes uniform one-inch margins on said letter-size paper.
+% Furthermore,
+% the MLA prescribes uniform one-inch margins on said letter-size paper.
 % This is taken care of with the \Dpkg{fullpage} package loaded in
 % section~\ref{sec:loading_packages}.  The \cs{textheight} and \cs{textwidth}
 % definitions are here just for good measure.
@@ -260,6 +278,7 @@
 %
 % The running head in MLA style is simply the author's surname
 % followed by the page number, right-aligned.
+% This is managed using the \Dpkg{fancyhdr} and \Dpkg{xstring} packages.
 %
 %    \begin{macrocode}
 \fancypagestyle{norule}{%
@@ -318,11 +337,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@title}
-% \begin{macro}{\@author}
-% \begin{macro}{\@professor}
-% \begin{macro}{\@course}
-% \begin{macro}{\@date}
 % We make sure the internal macros used to store the above information
 % are empty, lest something weird happen.  \cs{date}, however,
 % is generally set to the current date.
@@ -333,11 +347,6 @@
 \course{}
 \date{\today}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-% \end{macro}
 %
 % \begin{macro}{\makemlaheader}
 % This command prints out the standard five-line MLA header,
@@ -365,30 +374,18 @@
 % \subsection{Sectioning}
 % \label{sec:sectioning}
 %
-% \subsubsection{Counters}
-% \label{sec:counters}
-%
+% \begin{macro}{\section}
+% \begin{macro}{\subsection}
+% \begin{macro}{\subsubsection}
 % Customary section headers are rather straightforward and only consist of
 % the section number in Arabic numerals, a space and the section name,
 % flush left.
-%
-% \begin{macro}{\thesection}
-% \begin{macro}{\thesubsection}
-% \begin{macro}{\thesubsubsection}
-% For any given counter \Dctr{CTR}, \cs{theCTR} is a macro which
-% defines the printable version of counter \Dctr{CTR}.
 %
 %    \begin{macrocode}
 \renewcommand{\thesection}{\@arabic\c@section}
 \renewcommand{\thesubsection}{\thesection.\@arabic\c@subsection}
 \renewcommand{\thesubsubsection}{\thesubsection.\@arabic\c@subsubsection}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%
-% \subsubsection{Commands}
-% \label{sec:commands}
 %
 % Un-fancifying the section headers is acheived using the
 % \Dpkg{titlesec} package.
@@ -402,15 +399,21 @@
 \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
 \titlelabel{\thetitle. }
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
-% \subsection{Lists}
-% \label{sec:lists}
+% \TeX\ generally doesn't indent the first paragraph after a
+% section header.
+% Since this violates MLA style, we'll simply rely on the
+% \Dpkg{indentfirst} package as loaded in
+% section~\ref{sec:loading_packages}.
 %
 % \subsection{Block quotation}
 % \label{sec:block_quotation}
 %
 % \begin{environment}{blockquote}
-% MLA dictates block quotes be set flush $\frac{1}{2}$in from the left margin.
+% MLA dictates block quotes be set flush $0.5$in from the left margin.
 % We'll re-define the \Denv{blockquote} environment for this purpose.
 % The following looks like a complete hack\ldots because it is, honestly.
 %
@@ -427,10 +430,11 @@
 %
 % \subsection{Paper sections}
 %
-% \subsubsection{paper}
+% \subsubsection{Paper}
 %
 % \begin{environment}{paper}
 % The main content; the body.
+% Most everything you write will be in here.
 %    \begin{macrocode}
 \newenvironment{paper}{%
     \makemlaheader
@@ -439,22 +443,6 @@
 }
 %    \end{macrocode}
 % \end{environment}
-%
-% \subsubsection{Endnotes}
-%
-% \begin{environment}{endnotesmla}
-% For endnotes if any
-%    \begin{macrocode}
-%\newenvironment{endnotesmla}{%
-%    \begin{noindent}
-%        \begin{center}Notes\end{center}
-%    \end{noindent}
-%}{%
-%    \newpage
-%}
-%    \end{macrocode}
-% \end{environment}
-%
 %
 % \subsubsection{Bibliography}
 % \label{sec:bibliography}
@@ -480,6 +468,21 @@
 %    \begin{macrocode}
 \setlength{\bibhang}{\parindent}
 %    \end{macrocode}
+%
+% \appendix
+% \section{Example usage}
+% \label{sec:example_usage}
+%
+% Following is a basic \LaTeXe\ document using \Dfile{mla.cls}
+% and its corresponding bibliography.
+%
+% \subsection{\texttt{example.tex}}
+%
+% \verbatiminput{example.tex}
+%
+% \subsection{\texttt{example.bib}}
+%
+% \verbatiminput{example.bib}
 %
 % \Finale
 \endinput

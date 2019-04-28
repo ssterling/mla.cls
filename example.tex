@@ -1,0 +1,58 @@
+\documentclass[mla7]{mla}
+
+\title{Sample MLA Document}
+\author{John Doe}
+\professor{Dr Suzie Que}
+\course{\LaTeX\ 101}
+\date{\today}
+
+% This will be explained later!
+\addbibresource{example.bib}
+
+\begin{document}
+
+\begin{paper}
+
+This is an example document using ``mla.cls''.
+The header is automatically printed for you when calling the
+``paper'' environment, which is why we jumped straight into
+writing our body.
+
+\section{A section}
+
+Our professor prefers we section our paper since it's
+\emph{really} long:
+
+\begin{blockquote}
+I really hope you do this right, John.
+I got tired of reading that twenty-page paper with no logical breaks!
+Just divide it into sections already, even though the MLA style guide
+doesn't tell you to.
+It's technically not \emph{prohibited}, I guess.  \cite{que2019}
+\end{blockquote}
+
+That's when the ``\textbackslash{}section'' commands come in handy.
+You can even create a subsection!
+It's just like in the normal ``article'' class.
+
+\subsection{Subsection}
+
+Notice we cited something above in the blockquote.
+That's where ``workscited'' comes in handy with perfect MLA format!
+(The ``example.bib'' file follows this whole example.)
+
+\end{paper}
+
+\begin{workscited}
+
+% It's important to use ``heading=none'' here, since the
+% ``workscited'' environment already prints it out for us.
+
+% Also, notice we had to include the bibliography file
+% in the preamble.  That's important!
+
+\printbibliography[heading=none]
+
+\end{workscited}
+
+\end{document}
