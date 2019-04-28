@@ -260,6 +260,7 @@
 %
 % The running head in MLA style is simply the author's surname
 % followed by the page number, right-aligned.
+% This is managed using the \Dpkg{fancyhdr} and \Dpkg{xstring} packages.
 %
 %    \begin{macrocode}
 \fancypagestyle{norule}{%
@@ -384,6 +385,12 @@
 % \end{macro}
 % \end{macro}
 %
+% \TeX\ generally doesn't indent the first paragraph after a
+% section header.
+% Since this violates MLA style, we'll simply rely on the
+% \Dpkg{indentfirst} package as loaded in
+% section~\ref{sec:loading_packages}.
+%
 % \subsection{Block quotation}
 % \label{sec:block_quotation}
 %
@@ -417,22 +424,6 @@
 }
 %    \end{macrocode}
 % \end{environment}
-%
-% \subsubsection{Endnotes}
-%
-% \begin{environment}{endnotesmla}
-% For endnotes if any
-%    \begin{macrocode}
-%\newenvironment{endnotesmla}{%
-%    \begin{noindent}
-%        \begin{center}Notes\end{center}
-%    \end{noindent}
-%}{%
-%    \newpage
-%}
-%    \end{macrocode}
-% \end{environment}
-%
 %
 % \subsubsection{Bibliography}
 % \label{sec:bibliography}
