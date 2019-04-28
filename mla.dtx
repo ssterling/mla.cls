@@ -54,6 +54,9 @@
 \newcommand*{\Dpkg}[1]{\textsf{#1}}
 \newcommand*{\Denv}[1]{\textsf{#1}}
 
+% Needed for the appendix
+\usepackage{verbatim}
+
 \begin{document}
 \DocInput{mla.dtx}
 \end{document}
@@ -465,6 +468,21 @@
 %    \begin{macrocode}
 \setlength{\bibhang}{\parindent}
 %    \end{macrocode}
+%
+% \appendix
+% \section{Example usage}
+% \label{sec:example_usage}
+%
+% Following is a basic \LaTeXe\ document using \Dfile{mla.cls}
+% and its corresponding bibliography.
+%
+% \subsection{\texttt{example.tex}}
+%
+% \verbatiminput{example.tex}
+%
+% \subsection{\texttt{example.bib}}
+%
+% \verbatiminput{example.bib}
 %
 % \Finale
 \endinput
