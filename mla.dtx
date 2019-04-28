@@ -419,11 +419,13 @@
 %
 %    \begin{macrocode}
 \renewenvironment{blockquote}{%
-    \list{}{\leftmargin 1in}
+    \list{}{\leftmargin 0.5in}
     \item[]
     \setlength{\parindent}{0.5in}
+    \vspace{-\topsep}
 }{%
     \endlist
+    \vspace{-\topsep}
 }
 %    \end{macrocode}
 % \end{environment}
