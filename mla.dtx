@@ -157,6 +157,7 @@
 % The \Dclass{mla} class requires the following packages to work:
 %
 %    \begin{macrocode}
+\RequirePackage{enotez}
 \RequirePackage{fancyhdr}
 \RequirePackage{fullpage}
 \RequirePackage{indentfirst}
@@ -445,6 +446,36 @@
 }
 %    \end{macrocode}
 % \end{environment}
+%
+% \subsubsection{Endnotes}
+% \label{sec:endnotes}
+%
+% \begin{environment}{notes}
+% If you have any endnotes, they can be put in the
+% \Denv{notes} environment.
+%    \begin{macrocode}
+\newenvironment{notes}{%
+    \begin{noindent}
+        \begin{center}Notes\end{center}
+    \end{noindent}
+}{%
+    \newpage
+}
+%    \end{macrocode}
+% \end{environment}
+%
+% The MLA doesn't prescribe a strict set of rules for endnotes,
+% so the following is just to clean it up and make it consistent.
+% We're assuming the required \Dpkg{enotez} package is used;
+% refer to its documetation for an explanation of the following.
+%    \begin{macrocode}
+\setenotez{list-name={}}
+\DeclareInstance{enotez-list}{mla}{list}{%
+    heading = {},
+    format = \normalsize\normalfont,
+    list-type = description
+}
+%    \end{macrocode}
 %
 % \subsubsection{Bibliography}
 % \label{sec:bibliography}
