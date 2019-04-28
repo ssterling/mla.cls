@@ -18,6 +18,12 @@
 %
 % \section{Identification}
 %
+% For the \textsf{driver} code:
+%
+%<*driver>
+\ProvidesFile{mla.dtx}
+%</driver>
+%
 % The \Dclass{mla} class has only been tested with \LaTeXe ,
 % so we will make sure it doesn't get included in something else:
 %    \begin{macrocode}
@@ -26,7 +32,7 @@
 % 
 % Announce the class name and its version:
 %    \begin{macrocode}
-%<mla>\ProvidesClass{mla}[2019/04/22 v2 MLA Paper Class]
+%<mla>\ProvidesClass{mla}[2019/04/22 v0.1 MLA Paper Class]
 %    \end{macrocode}
 %
 % \subsection{Documentation driver}
@@ -37,7 +43,6 @@
 %    \begin{macrocode}
 %<*driver>
 \documentclass{ltxdoc}
-\GetFileInfo{mla.cls}
 \AtBeginDocument{\CodelineIndex\EnableCrossrefs}
 \AtEndDocument{\PrintIndex}
 
@@ -73,6 +78,8 @@
 %   Right bracket \]     Circumflex    \^     Underscore    \_
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
+%
+% \GetFileInfo{mla.dtx}
 %
 % \title{The \Dclass{mla} class\thanks{This document corresponds to
 %        \Dclass{mla}~\fileversion, dated \filedate.}}
