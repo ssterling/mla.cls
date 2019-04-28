@@ -245,7 +245,7 @@
 % the \Dpkg{ragged2e} package, so we'll re-define it.
 %    \begin{macrocode}
 \renewenvironment{noindent}{%
-    \def\tmpind{0.5in}
+    \edef\tmpind{\parindent}
     \setlength{\parindent}{0pt}
 }{%
     \setlength{\parindent}{\tmpind}
