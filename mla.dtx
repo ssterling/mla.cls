@@ -381,6 +381,7 @@
 % Customary section headers are rather straightforward and only consist of
 % the section number in Arabic numerals, a space and the section name,
 % flush left.
+% However, for the sake of clarity, we'll put ours in small-caps.
 %
 %    \begin{macrocode}
 \renewcommand{\thesection}{\@arabic\c@section}
@@ -392,9 +393,9 @@
 % \Dpkg{titlesec} package.
 %
 %    \begin{macrocode}
-\titleformat*{\section}{\normalsize}
-\titleformat*{\subsection}{\normalsize}
-\titleformat*{\subsubsection}{\normalsize}
+\titleformat*{\section}{\normalsize\sc}
+\titleformat*{\subsection}{\normalsize\sc}
+\titleformat*{\subsubsection}{\normalsize\sc}
 \titlespacing*{\section}{0pt}{0pt}{0pt}
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
 \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
