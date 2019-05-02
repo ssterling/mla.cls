@@ -57,6 +57,18 @@
 % Needed for the appendix
 \usepackage{verbatim}
 
+% I just want section headers in my PDF
+\usepackage[hidelinks]{hyperref}
+
+% Manually specify PDF metadata
+\hypersetup{
+    pdfinfo={
+        Title=The MLA class,
+        Author=Seth Price,
+        Creator=LaTeX
+    }
+}
+
 \begin{document}
 \DocInput{mla.dtx}
 \end{document}
@@ -173,7 +185,7 @@
 \RequirePackage[american]{babel}
 \RequirePackage{csquotes}
 \RequirePackage{hanging}
-\RequirePackage{hyperref}
+\RequirePackage[pdfusetitle]{hyperref}
 \RequirePackage[\blopts,backend=biber]{biblatex}
 %    \end{macrocode}
 %
@@ -457,6 +469,7 @@
 %    \begin{macrocode}
 \newenvironment{notes}{%
     \begin{noindent}
+        \pdfbookmark[0]{Notes}{notes}
         \begin{center}Notes\end{center}
     \end{noindent}
     \vspace{-16pt} % XXX to counter unexplained space
@@ -488,6 +501,7 @@
 %    \begin{macrocode}
 \newenvironment{workscited}{%
     \begin{noindent}
+        \pdfbookmark[0]{Works Cited}{workscited}
         \begin{center}Works Cited\end{center}
     \end{noindent}
     \vspace{-16pt} % XXX to counter unexplained space
