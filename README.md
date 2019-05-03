@@ -34,7 +34,7 @@ $ gv mla.dtx
 (If you're getting this package from [CTAN](https://ctan.org),
 a file called `mla.pdf` should already be provided.)
 
-For an example file, refer to `example.tex` and `example.bib`,
+For an example file, refer to `mla-example.tex` and `mla-example.bib`,
 or to the appendix in the documentation.
 
 Installation
