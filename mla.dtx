@@ -132,6 +132,31 @@
 \LoadClass[letterpaper,12pt]{article}
 %    \end{macrocode}
 %
+% \begin{macro}{\mladate}
+% MLA requires use of \textit{day month year} dates, not \TeX's
+% standard \textit{month, day year}.
+% Here we'll define our own \cs{mladate} to give correct output.
+%    \begin{macrocode}
+\newcommand{\mladate}{%
+    \the\day\ 
+    \ifcase\the\month
+        \or January
+        \or February
+        \or March
+        \or April
+        \or May
+        \or June
+        \or July
+        \or September
+        \or October
+        \or November
+        \or December
+    \fi
+    \the\year
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \section{Options}
 % \label{sec:options}
 %
@@ -364,13 +389,14 @@
 % \begin{macro}{\makemlaheader}
 % This command prints out the standard five-line MLA header,
 % including the centered title.
+% (Note the use of \cs{mladate}; see section \ref{sec:initial_code}.)
 %    \begin{macrocode}
 \newcommand{\makemlaheader}{%
     \begin{noindent}
         \@author \\
         \@professor \\
         \@course \\
-        \@date \\
+        \mladate \\
         \begin{center}\@title\end{center}
     \end{noindent}
 }
