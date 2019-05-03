@@ -32,7 +32,10 @@
 % 
 % Announce the class name and its version:
 %    \begin{macrocode}
-%<mla>\ProvidesClass{mla}[2019/04/22 v0.1 MLA Paper Class]
+%<mla>\ProvidesClass{mla}
+%<*mla>
+    [2019/04/22 v0.1 MLA Paper Class]
+%</mla>
 %    \end{macrocode}
 %
 % \subsection{Documentation driver}
@@ -43,7 +46,7 @@
 %    \begin{macrocode}
 %<*driver>
 \documentclass{ltxdoc}
-\AtBeginDocument{\CodelineIndex\EnableCrossrefs}
+\AtBeginDocument{\RecordChanges\CodelineIndex\EnableCrossrefs}
 \AtEndDocument{\PrintIndex}
 
 % These bits are some common shorthand I picked up
@@ -69,6 +72,8 @@
     }
 }
 
+\GetFileInfo{mla.dtx}
+
 \begin{document}
 \DocInput{mla.dtx}
 \end{document}
@@ -93,8 +98,6 @@
 %   Right bracket \]     Circumflex    \^     Underscore    \_
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
-%
-% \GetFileInfo{mla.dtx}
 %
 % \title{The \Dclass{mla} class\thanks{This document corresponds to
 %        \Dclass{mla}~\fileversion, dated \filedate.}}
