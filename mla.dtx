@@ -13,57 +13,40 @@
 % of LaTeX version 2008/05/04 or later.
 %
 % \fi
-
+%
 % \iffalse
 %
-% \section{Identification}
+% \section*{Documentation driver}
+% \addcontentsline{toc}{section}{Documentation driver}
 %
-% For the \textsf{driver} code:
-%
+%    \begin{macrocode}
 %<*driver>
 \ProvidesFile{mla.dtx}
 %</driver>
-%
-% The \Dclass{mla} class has only been tested with \LaTeXe ,
-% so we will make sure it doesn't get included in something else:
-%    \begin{macrocode}
+
 %<mla>\NeedsTeXFormat{LaTeX2e}
-%    \end{macrocode}
-% 
-% Announce the class name and its version:
-%    \begin{macrocode}
 %<mla>\ProvidesClass{mla}
 %<*mla>
     [2019/05/02 v0.2 MLA Paper Class]
 %</mla>
-%    \end{macrocode}
-%
-% \subsection{Documentation driver}
-%
-% The following is a boilerplate documentation driver for \TeX{}.
-% In short, it produces the documentation you're currently reading.
-%
-%    \begin{macrocode}
+
 %<*driver>
 \documentclass{ltxdoc}
 \AtBeginDocument{\RecordChanges\CodelineIndex\EnableCrossrefs}
-\AtEndDocument{\PrintIndex}
 
-% These bits are some common shorthand I picked up
+%% These bits are some common shorthand I picked up:
 \newcommand*{\Dfile}[1]{\texttt{#1}}
 \newcommand*{\Dopt}[1]{\textsf{\small #1}}
 \newcommand*{\Dctr}[1]{\textsl{\small #1}}
-\newcommand*{\Dclass}[1]{\textsf{#1}}
+\newcommand*{\Denv}[1]{\texttt{#1}}
+\newcommand*{\Dcls}[1]{\textsf{#1}}
 \newcommand*{\Dpkg}[1]{\textsf{#1}}
-\newcommand*{\Denv}[1]{\textsf{#1}}
 
-% Needed for the appendix
+%% Needed for the appendix
 \usepackage{verbatim}
 
-% I just want section headers in my PDF
+%% Fancy PDF
 \usepackage[hidelinks]{hyperref}
-
-% Manually specify PDF metadata
 \hypersetup{
     pdfinfo={
         Title=The MLA class,
@@ -72,6 +55,62 @@
     }
 }
 
+%% A couple things are cited in the docs
+\usepackage{filecontents}
+\begin{filecontents}{mla.bib}
+@book{mlahb,
+	author = {{Modern Language Association of America}},
+	shortauthor = {{Modern Language Association}},
+	title = {The {MLA} Handbook for Writers of Research Papers},
+	shorttitle = {Handbook},
+	edition = {8},
+	year = {2016},
+	publisher = {{Modern Language Association of America}},
+	howpublished = {Print},
+	isbn = {9781603292627}
+}
+@online{owlmla,
+	title = {{MLA} General Format},
+	journaltitle = {{P}urdue Online Writing Lab},
+	institution = {Purdue University},
+	howpublished = {Web},
+	urldate = {2019-05-06},
+	url = {https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_general_format.html}
+}
+@online{owlendnotes,
+	title = {{MLA} Endnotes and Footnotes},
+	journaltitle = {{P}urdue Online Writing Lab},
+	institution = {Purdue University},
+	howpublished = {Web},
+	urldate = {2019-05-06},
+	url = {https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_endnotes_and_footnotes.html}
+}
+\end{filecontents}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{mla.bib}
+
+%% Just thought it'd be cool to use `acro'
+\usepackage{acro}
+\DeclareAcronym{US}{short=US,long=United States}
+\DeclareAcronym{MLA}{short=MLA,long=Modern Language Association}
+\DeclareAcronym{CTAN}{short=CTAN,
+                      long=Comprehensive \TeX\ Archive Network}
+\DeclareAcronym{OWL}{short=OWL,long=Purdue Online Writing Lab}
+
+%% For a few different things
+%%\usepackage{semantic-markup}
+\usepackage{csquotes}
+\newcommand{\foreign}[1]{\textit{#1}}
+\newcommand{\term}[1]{\textit{#1}}
+\newcommand{\soCalled}[1]{\textquote{#1}}
+\newcommand{\mentioned}[1]{\textquote{#1}}
+
+%% Reset footnotes per page
+\usepackage[perpage]{footmisc}
+
+%% Technical info
+\def\myemail{ssterling@firemail.cc}
+
 \GetFileInfo{mla.dtx}
 
 \begin{document}
@@ -79,6 +118,7 @@
 \end{document}
 %</driver>
 %    \end{macrocode}
+%
 % \fi
 %
 % \CheckSum{0}
@@ -99,25 +139,27 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \title{The \Dclass{mla} class\thanks{This document corresponds to
-%        \Dclass{mla}~\fileversion, dated \filedate.}}
-% \author{Seth Price \\ \texttt{ssterling@firemail.cc}}
+% \title{The \Dcls{mla} class\thanks{This document corresponds to
+%        \Dcls{mla}~\fileversion, dated \filedate.}}
+% \author{Seth Price \\ \href{mailto:\myemail}{\texttt{\myemail}}}
 % \date{\filedate}
 %
 % \maketitle
 %
 % \begin{abstract}
-% Whilst the \TeX\ family of programs is widely used in the sciences
-% and academia overall, there seems to be a lack of support for
-% the humanities, which commonly adhere to MLA format for
-% student papers and reports.
+% In the \acl{US}, secondary and undergraduate students
+% are generally expected to adhere to the format prescribed by
+% the \ac{MLA} for typewritten essays, research papers and writings.
+% Sadly, the tool of choice is usually Microsoft Word,
+% even amongst those fluent with \TeX .
 %
-% Though there \emph{are} MLA-style packages available,
-% none met the expectations of the author (who was mostly
-% just nit-picky about elegance in code).
-% So \textit{voil\`a}, there now exists a proper \Dfile{mla.cls}:
+% Though there \emph{are} some templates and tools to aid in
+% writing in the \ac{MLA} format using \LaTeX ,
+% none fully met the expectations of the author.
+% So \foreign{voil\`a}, there now exists an \Dfile{mla.cls} proper:
 % a simple, straightforward class for composing papers
-% almost perfectly adherent to the MLA style guide.
+% almost perfectly adherent to the
+% \ac{MLA} style guide\footfullcite{mlahb}.
 % \end{abstract}
 %
 % \tableofcontents
@@ -127,18 +169,18 @@
 % \section{Initial code}
 % \label{sec:initial_code}
 %
-% The \Dclass{mla} class is based off the \Dclass{article} class,
-% so common macros such as \cs{textit} or \cs{figure} are
-% useable as expected.
-% Not to say we won't be re-defining a lot of macros, though.
+% The \Dcls{mla} class uses the \Dcls{article} class as its base.
+% Thanks to this, macros such as \cs{textit} or \cs{textsuperscript}
+% work as expected and won't have to be re-defined.
 %    \begin{macrocode}
 \LoadClass[letterpaper,12pt]{article}
 %    \end{macrocode}
 %
 % \begin{macro}{\mladate}
-% MLA requires use of \textit{day month year} dates, not \TeX's
-% standard \textit{month, day year}.
-% Here we'll define our own \cs{mladate} to give correct output.
+% The \citetitle{mlahb} requires use of the \term{day month year}
+% date format, not \TeX 's standard \term{month day, year}.
+% The macro \cs{mladate} will format \cs{date} accordingly.
+%
 %    \begin{macrocode}
 \newcommand{\mladate}{%
     \the\day\ 
@@ -163,12 +205,13 @@
 % \section{Options}
 % \label{sec:options}
 %
-% Some instructors will still require usage of the seventh edition of MLA.
-% MLA 8e is the default for this class, but either can be explicitly specified
-% with the \Dopt{mla8} or \Dopt{mla7} options.
-% All this actually does is change the edition specified to the
-% \Dclass{biblatex} package when loaded in in
-% section~\ref{sec:loading_packages}.
+% Some teachers and professors might still require using
+% the seventh edition of the \citetitle{mlahb},
+% while others will likely use the eighth edition.
+% Which edition to implement can be explicitly specified
+% with the \Dopt{mla7} and \Dopt{mla8} class options.
+% The only difference this makes within the \Dcls{mla} class itself
+% is the citation format used by \Dpkg{biblatex}.
 %
 %    \begin{macrocode}
 \DeclareOption{mla7}{%
@@ -182,9 +225,9 @@
 % \subsection{Processing}
 % \label{sec:processing}
 %
-% The default is to use the eighth edition of MLA.
-% Just in case something changes, however, it's wise to explicitly
-% specify \Dopt{mla8} in \cs{documentclass}.
+% By default, the eighth edition of the \citetitle{mlahb} is used.
+% To future-proof your documents for upcoming editions, however,
+% it may be wise to explicitly specify \Dopt{mla8}.
 %
 %    \begin{macrocode}
 \ExecuteOptions{mla8}
@@ -194,7 +237,10 @@
 % \section{Loading packages}
 % \label{sec:loading_packages}
 %
-% The \Dclass{mla} class requires the following packages to work:
+% The \Dcls{mla} class requires the following packages\footnote{All
+% of the required packages are available for download
+% on the \ac{CTAN} if unavailable on your system:
+% \url{https://www.ctan.org/}.}:
 %
 %    \begin{macrocode}
 \RequirePackage{enotez}
@@ -207,8 +253,9 @@
 \RequirePackage{xstring}
 %    \end{macrocode}
 %
-% And after all that, we finally load \Dpkg{biblatex} for the bibliography.
-% The other packages here are prerequisites for \Dpkg{biblatex-mla}.
+% The following consists of prerequisites for \Dpkg{biblatex-mla}
+% as well as \Dpkg{biblatex} itself:
+%
 %    \begin{macrocode}
 \RequirePackage[american]{babel}
 \RequirePackage{csquotes}
@@ -217,36 +264,42 @@
 \RequirePackage[\blopts,backend=biber]{biblatex}
 %    \end{macrocode}
 %
-% \section{Document Layout}
+% Refer to section \ref{sec:options} for information on \cs{blopts}.
+%
+% \section{Document layout}
 % \label{sec:document_layout}
-% 
-% Now for the difficult part.
-% A lot of professors are \emph{really} strict when it comes to laying out
-% the paper right, so we can't take any chances here.
 %
 % \subsection{Font}
 % \label{sec:font}
 %
 % The \Dpkg{times} package was already loaded in
-% section~\ref{sec:loading_packages}, and the font size was set to
-% 12pt when loading the \Dclass{article} class in
-% section~\ref{sec:initial_code}.
+% section~\ref{sec:loading_packages},
+% and the font was set to 12pt when loading the \Dcls{article} class
+% in section~\ref{sec:initial_code}.
 % This should be metric-compatible with the infamous Times New Roman,
-% the \textit{de facto} standard of the MLA format.
+% the \foreign{de facto} standard of the
+% \ac{MLA} format\footnote{According to the popular, oft-referenced
+% \ac{OWL}: \citeurl{owlmla}.}.
 %
-% \subsection{Line spacing and breaking}
+% \subsection{Line breaking and spacing}
 % \label{sec:line_breaking}
 %
-% The MLA prescribes perfect double-spacing, but \LaTeX\ does it
-% a little \emph{too} perfect, putting one less line of text on the
-% paper than expected from the ``industry standard'', Microsoft Word.
-% We'll compensate by setting the line spacing to \textit{just enough}.
+% The \citetitle{mlahb} prescribes exact double-spacing,
+% the definition of which varies between typesetters.
+% With these parameters exact, \LaTeX\ produces 23 lines of text
+% whereas the \soCalled{industry standard}
+% Microsoft Word\footnote{Microsoft Word 97 through 2016,
+% and likely following versions as well.} produces 24.
+% To compensate, line spacing is set to \emph{just enough}:
+%
 %    \begin{macrocode}
 \linespread{1.99}
 %    \end{macrocode}
 %
-% To further adhere to the MLA style guide, we'll forego all hyphenation
-% and allow weird line breaks and uncanny whitespace.
+% Though not explicitly denounced in the \citetitle{mlahb},
+% most \ac{MLA}-style papers don't hyphenate or adjust spacing
+% for pretty typesetting.
+%
 %    \begin{macrocode}
 \hyphenpenalty 10000
 \pretolerance 10000
@@ -255,10 +308,9 @@
 % \subsection{Paragraphing}
 % \label{sec:paragraphing}
 %
-% MLA prescribes half-inch indents on the first line of each paragraph
-% with no spaces in between.
-% (Some professors will request you separate sections of lengthy papers,
-% however; just put a paragraph in between the two consisting of ``\cs{par}''.)
+% The \citetitle{mlahb} specifies half-inch first-line indentation
+% for each paragraph and no extra spacing in between.
+%
 %    \begin{macrocode}
 \setlength{\parindent}{0.5in}
 \setlength{\RaggedRightParindent}{\parindent}
@@ -266,24 +318,27 @@
 \setlength{\topsep}{0em}
 %    \end{macrocode}
 %
-% MLA also cares more about consistent page count than beautiful typesetting.
-% So, we'll accept our fate and allow orphans and widows for the sake of
-% uniform line count.
+% And, for the sake of consistent 24-line papers,
+% orphans and widows are explicitly allowed.
+%
 %    \begin{macrocode}
 \widowpenalty 0
 \clubpenalty 0
 \interlinepenalty 0
 %    \end{macrocode}
 %
-% We also want flush-left ragged lines.
+% For a final heinous crime against typesetting,
+% the \citetitle{mlahb} advises flush-left/ragged-right alignment.
 % (This is acheived with the \Dpkg{ragged2e} package.)
+%
 %    \begin{macrocode}
 \RaggedRight
 %    \end{macrocode}
 %
 % \begin{environment}{noindent}
-% The \Denv{noindent} environment works a little wonky when working with
-% the \Dpkg{ragged2e} package, so we'll re-define it.
+% The \Denv{noindent} environment doesn't work as expected
+% in conjunction with \Dpkg{ragged2e}, hence the re-definition.
+%
 %    \begin{macrocode}
 \renewenvironment{noindent}{%
     \edef\tmpind{\parindent}
@@ -293,32 +348,32 @@
     \undef{\tmpind}
 }
 %    \end{macrocode}
-%
 % \end{environment}
 %
 % \subsection{Page layout}
 % \label{sec:page_layout}
 %
-% The MLA uses standard ``letter-size'' paper, and that's almost
-% all we have in America anyway.
-% The paper size was already set to letter when loading the
-% \Dclass{article} class in section~\ref{sec:initial_code}.
+% With few exceptions, the \ac{US} uses \soCalled{letter-size} paper.
+% The paper size was already set when loading the \Dcls{article} class
+% in section~\ref{sec:initial_code}.
 %
-% Furthermore,
-% the MLA prescribes uniform one-inch margins on said letter-size paper.
-% This is taken care of with the \Dpkg{fullpage} package loaded in
-% section~\ref{sec:loading_packages}.  The \cs{textheight} and \cs{textwidth}
-% definitions are here just for good measure.
+% Furthermore, the \citetitle{mlahb} dictates uniform one-inch margins
+% on said paper.
+% This was already set by the \Dpkg{fullpage} package as loaded
+% in section~\ref{sec:loading_packages}.
+% The \cs{textheight} and \cs{textwidth} definitions are here
+% just for good measure.
+%
 %    \begin{macrocode}
 \setlength{\textheight}{9in}
 \setlength{\textwidth}{6.5in}
 %    \end{macrocode}
-%
+% 
 % \subsection{Running head}
 % \label{sec:running_head}
 %
-% The running head in MLA style is simply the author's surname
-% followed by the page number, right-aligned.
+% The running head in \ac{MLA} style is simply the author's surname
+% followed by the current page number, right-aligned.
 % This is managed using the \Dpkg{fancyhdr} and \Dpkg{xstring} packages.
 %
 %    \begin{macrocode}
@@ -332,9 +387,8 @@
 \fancyhead[RO]{{\StrBehind{\@author}{ }[\last]\last} \thepage}
 %    \end{macrocode}
 %
-% I have to fully admit I don't know what the following code
-% actually does, but I tweaked around the variables to get it all
-% in the right place.
+% The following code is largely a hack to align the header
+% in the middle of the one-inch margin above the body text.
 %
 %    \begin{macrocode}
 \setlength{\headheight}{18pt}
@@ -342,45 +396,36 @@
 \setlength{\voffset}{-34pt}
 %    \end{macrocode}
 %
-% \section{Document Markup}
+% \section{Document markup}
 % \label{sec:document_markup}
 %
 % \subsection{The header}
 % \label{sec:the_header}
 %
-% \begin{macro}{\title}
-% \begin{macro}{\author}
-% \begin{macro}{\date}
-% The \cs{title}, \cs{author} and
-% \cs{date} macros are already defined in \Dfile{latex.dtx}.
-% Their definitions are shown here for reference.
-%    \begin{macrocode}
-% \newcommand*{\title}[1]{\gdef\@title{#1}}
-% \newcommand*{\author}[1]{\gdef\@author{#1}}
-% \newcommand*{\date}[1]{\gdef\@date{#1}}
-%    \end{macrocode}
-% \end{macro}
-% \end{macro}
-% \end{macro}
-%
-% The following, however, are unique to the \Dclass{mla} class.
+% The \cs{title}, \cs{author} and \cs{date} macros work as expected.
+% The following, however, are unique to the \Dcls{mla} class.
 %
 % \begin{macro}{\professor}
-% The name of whoever assigned the paper, i.e. ``Dr Marjorie Stewart''.
+% The instructor who assigned the paper, i.e.
+% \mentioned{Dr. Marjorie Stewart}.
+%
 %    \begin{macrocode}
 \newcommand*{\professor}[1]{\gdef\@professor{#1}}
 %    \end{macrocode}
 % \end{macro}
+%
 % \begin{macro}{\course}
-% The course for which this paper was assigned, i.e. ``ENGL 101-02''.
+% The course for which this paper was assigned, i.e.
+% \mentioned{ENGL 101-02}.
+%
 %    \begin{macrocode}
 \newcommand*{\course}[1]{\gdef\@course{#1}}
 %    \end{macrocode}
 % \end{macro}
 %
-% We make sure the internal macros used to store the above information
-% are empty, lest something weird happen.  \cs{date}, however,
-% is generally set to the current date.
+% To prevent undefined behavior, the internal macros used
+% to store the above information are set empty (except for \cs{date}).
+%
 %    \begin{macrocode}
 \title{}
 \author{}
@@ -388,11 +433,12 @@
 \course{}
 \date{\today}
 %    \end{macrocode}
-%
+% 
 % \begin{macro}{\makemlaheader}
-% This command prints out the standard five-line MLA header,
-% including the centered title.
-% (Note the use of \cs{mladate}; see section \ref{sec:initial_code}.)
+% This command finally prints out the standard four-line
+% \ac{MLA} header, as well as the title.
+% (Note the use of \cs{mladate}; see section~\ref{sec:initial_code}.)
+%
 %    \begin{macrocode}
 \newcommand{\makemlaheader}{%
     \begin{noindent}
@@ -406,12 +452,12 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\maketitle}
-% And we'll just re-define \cs{maketitle} to execute \cs{makemlaheader}.
+% For simplicity's sake, \cs{maketitle} is directly aliased
+% to \cs{makemlaheader}.
+%
 %    \begin{macrocode}
 \renewcommand{\maketitle}{\makemlaheader}
 %    \end{macrocode}
-% \end{macro}
 %
 % \subsection{Sectioning}
 % \label{sec:sectioning}
@@ -419,10 +465,15 @@
 % \begin{macro}{\section}
 % \begin{macro}{\subsection}
 % \begin{macro}{\subsubsection}
-% Customary section headers are rather straightforward and only consist of
-% the section number in Arabic numerals, a space and the section name,
-% flush left.
-% However, for the sake of clarity, we'll put ours in small-caps.
+% Section headings are neither defined nor discouraged
+% in the \citetitle{mlahb}, though commonly used in longer papers.
+% Customary section headings are rather straightforward,
+% consisting of the section number in Arabic numerals, a space,
+% and the section name with no special decoration\footnote{According to
+% the popular, oft-referenced \ac{OWL}: \citeurl{owlmla}.}.
+%
+% However, for the sake of clarity, the section headings in this class
+% will be set in small-caps.
 %
 %    \begin{macrocode}
 \renewcommand{\thesection}{\@arabic\c@section}
@@ -430,8 +481,8 @@
 \renewcommand{\thesubsubsection}{\thesubsection.\@arabic\c@subsubsection}
 %    \end{macrocode}
 %
-% Un-fancifying the section headers is acheived using the
-% \Dpkg{titlesec} package.
+% Un-fancifying the headings is acheived using
+% the \Dpkg{titlesec} package.
 %
 %    \begin{macrocode}
 \titleformat*{\section}{\normalsize\sc}
@@ -446,19 +497,19 @@
 % \end{macro}
 % \end{macro}
 %
-% \TeX\ generally doesn't indent the first paragraph after a
-% section header.
-% Since this violates MLA style, we'll simply rely on the
-% \Dpkg{indentfirst} package as loaded in
-% section~\ref{sec:loading_packages}.
+% Under default configuration, \TeX\ doesn't indent the
+% first paragraph after a section heading, violating \ac{MLA} style.
+% The solution \Dpkg{indentfirst} package was already loaded
+% in section~\ref{sec:loading_packages}.
 %
 % \subsection{Block quotation}
-% \label{sec:block_quotation}
+% \label{sec:block_quoatation}
 %
 % \begin{environment}{blockquote}
-% MLA dictates block quotes be set flush $0.5$in from the left margin.
-% We'll re-define the \Denv{blockquote} environment for this purpose.
-% The following looks like a complete hack\ldots because it is, honestly.
+% The \citetitle{mlahb} dictates blockquotes be set flush a half-inch
+% from the left margin with no extra space on the right.
+% The existing \Denv{blockquote} environment is re-defined
+% for this purpose.
 %
 %    \begin{macrocode}
 \renewenvironment{blockquote}{%
@@ -474,12 +525,15 @@
 % \end{environment}
 %
 % \subsection{Paper sections}
+% \label{sec:paper_sections}
 %
 % \subsubsection{Paper}
+% \label{sec:paper_env}
 %
 % \begin{environment}{paper}
 % The main content; the body.
-% Most everything you write will be in here.
+% This environment produces the \ac{MLA} header at the top.
+%
 %    \begin{macrocode}
 \newenvironment{paper}{%
     \makemlaheader
@@ -493,8 +547,10 @@
 % \label{sec:endnotes}
 %
 % \begin{environment}{notes}
-% If you have any endnotes, they can be put in the
-% \Denv{notes} environment.
+% Endnotes can be typeset manually or with the supported
+% \Dpkg{enotez} package\footnote{Refer to the \Dpkg{enotez}
+% documentation for instructions.}.
+%
 %    \begin{macrocode}
 \newenvironment{notes}{%
     \begin{noindent}
@@ -508,10 +564,11 @@
 %    \end{macrocode}
 % \end{environment}
 %
-% The MLA doesn't prescribe a strict set of rules for endnotes,
-% so the following is just to clean it up and make it consistent.
-% We're assuming the required \Dpkg{enotez} package is used;
-% refer to its documetation for an explanation of the following.
+% The following code is to format endnotes per
+% common practice\footnote{According to the popular, oft-referenced
+% \ac{OWL}: \citeurl{owlendnotes}.}
+% when using the \Dpkg{enotez} package.
+%
 %    \begin{macrocode}
 \setenotez{list-name={}}
 \DeclareInstance{enotez-list}{mla}{list}{%
@@ -525,8 +582,10 @@
 % \label{sec:bibliography}
 %
 % \begin{environment}{workscited}
-% This environment creates the bibliography, starting on
-% the next counted page number.
+% The bibliography can be typeset manually or with the supported
+% \Dpkg{biblatex} package\footnote{Refer to the \Dpkg{biblatex}
+% documentation for instructions.}.
+%
 %    \begin{macrocode}
 \newenvironment{workscited}{%
     \begin{noindent}
@@ -540,10 +599,11 @@
 %    \end{macrocode}
 % \end{environment}
 %
-% MLA prescribes a half-inch hanging indent on all
-% bibliography entries.
-% This is acheived by setting the \cs{bibhang} macro
-% defined in the \Dpkg{biblatex} package.
+% The \citetitle{mlahb} prescribes a half-inch hanging indent
+% on all bibliography entries.
+% This is achieved by setting the \cs{bibhang} length
+% defined by the \Dpkg{biblatex} package.
+%
 %    \begin{macrocode}
 \setlength{\bibhang}{\parindent}
 %    \end{macrocode}
@@ -552,14 +612,17 @@
 % \section{Example usage}
 % \label{sec:example_usage}
 %
-% Following is a basic \LaTeXe\ document using \Dfile{mla.cls}
-% and its corresponding bibliography.
+% Following is a basic \LaTeX\ document using the \Dcls{mla} class.
+% The document is composed of a text file, \Dfile{mla-example.tex},
+% and a \Dpkg{biblatex} bibliography file, \Dfile{mla-example.bib}.
 %
-% \subsection{\texttt{mla-example.tex}}
+% \subsection{\Dfile{mla-example.tex}}
+% \label{sec:mla-example.tex}
 %
 % \verbatiminput{mla-example.tex}
 %
-% \subsection{\texttt{mla-example.bib}}
+% \subsection{\Dfile{mla-example.bib}}
+% \label{sec:mla-example.bib}
 %
 % \verbatiminput{mla-example.bib}
 %

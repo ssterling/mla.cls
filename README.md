@@ -6,19 +6,19 @@ LaTeX class for MLA papers.
 Abstract
 --------
 
-Whilst the TeX family of programs is widely used in the sciences
-and academia overall, there seems to be a lack of support for
-the humanities, which commonly adhere to MLA format for
-student papers and reports.
+In the United States, secondary and undergraduate students
+are generally expected to adhere to the format prescribed by
+the Modern Language Association (MLA) for typewritten essays,
+research papers and writings.
+Sadly, the tool of choice is usually Microsoft Word,
+even amongst those fluent with TeX.
 
-Though there *are*
-[MLA-style packages available](https://ctan.org/pkg/mla-paper),
-none met the expectations of the author (who was mostly
-just nit-picky about elegance in code).
-So *voilà*, there now exists a proper `mla.cls`:
-a simple, straightforward class for composing papers
-almost perfectly adherent to the
-[MLA style guide](https://style.mla.org/).
+Though there *are* some templates and tools to aid in writing
+in the MLA format using LaTeX, none fully met the expectations
+of the author.
+So *voilà*, there now exists an `mla.cls` proper:
+a simple, straightforward class for composing papers almost
+perfectly adherent to the MLA style guide.
 
 Documentation
 -------------
@@ -62,9 +62,6 @@ Contributing
 Submit a merge request on the
 [GitLab repository](https://gitlab.com/ssterling/mlacls/).
 I rarely look at the GitHub mirror.
-
-If there's something in [`TODO.md`](./TODO.md), it's likely
-a high-priority want, right under bug fixes.
 
 Bugs
 ----

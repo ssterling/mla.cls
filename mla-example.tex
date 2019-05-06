@@ -1,12 +1,12 @@
-\documentclass[mla7]{mla}
+\documentclass[mla8]{mla}
 
 \title{Sample MLA Document}
 \author{John Doe}
-\professor{Dr Suzie Que}
+\professor{Dr. Suzie Que}
 \course{\LaTeX\ 101}
 \date{\today}
 
-% This will be explained later!
+% The .bib file (explained later) must be included in the preamble
 \addbibresource{mla-example.bib}
 
 \begin{document}
@@ -14,50 +14,70 @@
 \begin{paper}
 
 This is an example document using ``mla.cls''.
-The header is automatically printed for you when calling the
-``paper'' environment, which is why we jumped straight into
-writing our body.
+The header is automatically printed upon using the ``paper'' class,
+which is why there is no ``\textbackslash{}maketitle''.
 
-\section{A section}
+\section{Professors who prefer sections}
 
-Our professor prefers we section our paper since it's
-\emph{really} long:
+Sometimes, research papers can become unmanageably lengthy.
+In that case, section headings can help divide up the ideas
+to make it more accessible to the reader.
+Though this paper is short, section headings are employed
+as an example of the ``mla'' class' capabilities.
+
+Some professors may explicitly require or denounce use of headings.
+Dr. Suzie Que of Anytown, PA requires they be used for anything
+longer than five pages:
 \begin{blockquote}
-I really hope you do this right, John.
-I got tired of reading that twenty-page paper with no logical breaks!
-Just divide it into sections already, even though the MLA style guide
-doesn't tell you to.
-It's technically not \emph{prohibited}, I guess.  \cite{que2019}
+John---so help me God---if you turn in another twenty-page research
+paper with no logical breaks I will hang you at the stake.
+Even though the MLA style guide doesn't say anything about
+section headings, they're not actually prohibited.
+So, if you turn in \emph{anything} longer than five pages to me
+and there isn't a \emph{single} break or section heading,
+I will dock your grade to an F.
+Capisce? \cite{que2019}
 \end{blockquote}
-That's when the ``\textbackslash{}section'' commands come in handy.
-You can even create a subsection!\endnote{It's just like in the
-normal ``article'' class.}
+Despite her language, she does have a point to say.
 
-\subsection{Subsection}
+\subsection{Subsections}
 
-Notice we cited something above in the blockquote.
-That's where ``workscited'' comes in handy with perfect MLA format!
-(The ``example.bib'' file follows this whole example.)
-But, before that\ldots didn't we specify an endnote somewhere?
+Alongside regular top-level sections, one can use
+``\textbackslash{}subsection'' commands too\endnote{Section commands
+in ``mla.cls'' work identical to those of the ``article'' class.}.
+
+\section{Using endnotes}
+
+As one may notice, the above subsection used an endnote.
+These can simply be cited with
+``Yada yada text\textbackslash{}endnote\{more info\ldots\}.''
+Endnotes can be easily printed in correct format by calling
+``\textbackslash{}printendnotes[mla]'' within the
+``notes'' environment.
+
+\section{Using bibliographies}
+
+Dr. Suzie Que was cited in the above blockquote.
+The ins-and-outs of ``biblatex'' will not be explained in this
+document, so please refer to online documentation such as the
+``BibLaTeX Cheat Sheet''.
+
+Just as with the endnotes,
+the bibliography can be easily printed in correct format by calling
+``\textbackslash{}printbibliography[heading=none]'' within the
+``workscited'' environment.
+(The ``heading=none'' part is important; the ``workscited'' environment
+already prints one.)
 
 \end{paper}
 
 \begin{notes}
-
-% It's also important you use the MLA template
-% provided with the class, lest it look wrong.
 
 \printendnotes[mla]
 
 \end{notes}
 
 \begin{workscited}
-
-% It's important to use ``heading=none'' here, since the
-% ``workscited'' environment already prints it out for us.
-
-% Also, notice we had to include the bibliography file
-% in the preamble.  That's important!
 
 \printbibliography[heading=none]
 
