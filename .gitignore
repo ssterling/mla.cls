@@ -7,14 +7,23 @@ Session.vim
 
 # Auxiliary files
 *.aux
+*.bbl
+*.bcf
+*.blg
+*.glo
 *.idx
 *.log
+*.out
 *.toc
 *.run.xml
 
 # Generated files (output)
 *.cls
+*.dvi
 *.pdf
 
-# might upload to CTAN someday
+# Output by `filecontents'
+mla.bib
+
+# for CTAN packaging things
 pkg/*
