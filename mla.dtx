@@ -214,16 +214,21 @@
 % is the citation format used by \Dpkg{biblatex}.
 %
 %    \begin{macrocode}
-\DeclareOption{mla7}{%
-    \def\blopts{style=mla,noremoteinfo=false,showmedium=true}
-}
-\DeclareOption{mla8}{%
-    \def\blopts{style=mla-new,noremoteinfo=false,showmedium=false}
-}
+\DeclareOption{mla7}{\def\@optMlaSeven}
+\DeclareOption{mla8}{\def\@optMlaEight}
 %    \end{macrocode}
 %
 % \subsection{Processing}
 % \label{sec:processing}
+%
+% A friendly warning will be provided when an unknown option
+% is provided.
+%
+%    \begin{macrocode}
+\DeclareOption*{%
+    \ClassWarning{mla}{Unknown option `\CurrentOption'; ignoring}
+}
+%    \end{macrocode}
 %
 % By default, the eighth edition of the \citetitle{mlahb} is used.
 % To future-proof your documents for upcoming editions, however,
@@ -253,18 +258,32 @@
 \RequirePackage{xstring}
 %    \end{macrocode}
 %
-% The following consists of prerequisites for \Dpkg{biblatex-mla}
-% as well as \Dpkg{biblatex} itself:
+% The following consists of prerequisites for \Dpkg{biblatex-mla}:
 %
 %    \begin{macrocode}
 \RequirePackage[american]{babel}
 \RequirePackage{csquotes}
 \RequirePackage{hanging}
 \RequirePackage[hidelinks,pdfusetitle]{hyperref}
-\RequirePackage[\blopts,backend=biber]{biblatex}
 %    \end{macrocode}
 %
-% Refer to section \ref{sec:options} for information on \cs{blopts}.
+% And finally, \Dpkg{biblatex}.
+% The \Dcls{mla} class options dictate what options are passed to
+% \Dpkg{biblatex}, hence the \term{if-then} clauses.
+% Due to the nature of the code, earlier editions specified
+% will override later versions (this will later be fixed).
+%
+%    \begin{macrocode}
+\ifdefined\@optMlaSeven
+    \RequirePackage[style=mla,noremoteinfo=false,showmedium=true,
+                    backend=biber]{biblatex}
+\else
+    \ifdefined\@optMlaEight
+        \RequirePackage[style=mla-new,noremoteinfo=false,
+                        showmedium=false,backend=biber]{biblatex}
+    \fi
+\fi
+%    \end{macrocode}
 %
 % \section{Document layout}
 % \label{sec:document_layout}

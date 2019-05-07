@@ -1,7 +1,8 @@
 Bugs
 ====
 
-None currently known.
+* Specifying both options `mla7` and `mla8` doesn't return an error,
+  but instead falls back to `mla7`.
 
 Reporting
 ---------
