@@ -242,6 +242,15 @@
 \DeclareOption{mla8}{\def\@optMlaEight}
 %    \end{macrocode}
 %
+% \changes{v0.3}{2019/05/07}{Added \Dopt{mla8alt} option}
+% Some versions of \Dpkg{biblatex-mla} might not recognize
+% the \Dopt{style=mla-new} option for the eighth edition.
+% In this case, one can specify \Dopt{mla8alt}
+% to the \Dcls{mla} class.
+%    \begin{macrocode}
+\DeclareOption{mla8alt}{\def\@optMlaEightAlt}
+%    \end{macrocode}
+%
 % \subsection{Processing}
 % \label{sec:processing}
 %
@@ -306,10 +315,13 @@
     \RequirePackage[style=mla,noremoteinfo=false,showmedium=true,
                     backend=biber]{biblatex}
 \else
-    \ifdefined\@optMlaEight
+    \ifdefined\@optMlaEightAlt
+        \RequirePackage[style=mla,noremoteinfo=false,
+                        showmedium=false,backend=biber]{biblatex}
+    \else\ifdefined\@optMlaEight
         \RequirePackage[style=mla-new,noremoteinfo=false,
                         showmedium=false,backend=biber]{biblatex}
-    \fi
+    \fi\fi
 \fi
 %    \end{macrocode}
 %
