@@ -96,6 +96,7 @@
 \DeclareAcronym{CTAN}{short=CTAN,
                       long=Comprehensive \TeX\ Archive Network}
 \DeclareAcronym{OWL}{short=OWL,long=Purdue Online Writing Lab}
+\DeclareAcronym{PDF}{short=PDF,long=Portable Document Format}
 
 %% For a few different things
 %%\usepackage{semantic-markup}
@@ -110,6 +111,13 @@
 
 %% Technical info
 \def\myemail{ssterling@firemail.cc}
+
+%% For the sake of consistency, I guess
+\GlossaryPrologue{\pdfbookmark[0]{Change history}{ch}
+	\section*{Change history}}
+
+%% Comment this if you don't want to produce a changelog
+\AtEndDocument{\PrintChanges}
 
 \GetFileInfo{mla.dtx}
 
@@ -181,6 +189,7 @@
 % date format, not \TeX 's standard \term{month day, year}.
 % The macro \cs{mladate} will format \cs{date} accordingly.
 %
+% \changes{v0.2}{2019/05/02}{Added macro}
 %    \begin{macrocode}
 \newcommand{\mladate}{%
     \the\day\ 
@@ -213,6 +222,8 @@
 % The only difference this makes within the \Dcls{mla} class itself
 % is the citation format used by \Dpkg{biblatex}.
 %
+% \changes{v0.3}{2019/05/06}{Improved options parsing to avoid
+	contradiction and undefined behavior}
 %    \begin{macrocode}
 \DeclareOption{mla7}{\def\@optMlaSeven}
 \DeclareOption{mla8}{\def\@optMlaEight}
@@ -247,6 +258,8 @@
 % on the \ac{CTAN} if unavailable on your system:
 % \url{https://www.ctan.org/}.}:
 %
+% \changes{v0.3}{2019/05/07}{Replaced obsolete \Dpkg{times} package
+	with \Dpkg{newtxtext}}
 %    \begin{macrocode}
 \RequirePackage{enotez}
 \RequirePackage{fancyhdr}
@@ -260,6 +273,8 @@
 %
 % The following consists of prerequisites for \Dpkg{biblatex-mla}:
 %
+% \changes{v0.2}{2019/05/02}{Hid hyperlink boxes in \acs{PDF} output}
+% \changes{v0.2}{2019/05/02}{Added support for \acs{PDF} metadata}
 %    \begin{macrocode}
 \RequirePackage[american]{babel}
 \RequirePackage{csquotes}
@@ -458,6 +473,8 @@
 % \ac{MLA} header, as well as the title.
 % (Note the use of \cs{mladate}; see section~\ref{sec:initial_code}.)
 %
+% \changes{v0.2}{2019/05/02}{Changed date format to
+	\term{day month year}}
 %    \begin{macrocode}
 \newcommand{\makemlaheader}{%
     \begin{noindent}
@@ -482,8 +499,13 @@
 % \label{sec:sectioning}
 %
 % \begin{macro}{\section}
+% \changes{v0.2}{2019/05/02}{Changed heading to small-caps}
 % \begin{macro}{\subsection}
+% \changes{v0.2}{2019/04/27}{Properly formatted}
+% \changes{v0.2}{2019/05/02}{Changed heading to small-caps}
 % \begin{macro}{\subsubsection}
+% \changes{v0.2}{2019/04/27}{Properly formatted}
+% \changes{v0.2}{2019/05/02}{Changed heading to small-caps}
 % Section headings are neither defined nor discouraged
 % in the \citetitle{mlahb}, though commonly used in longer papers.
 % Customary section headings are rather straightforward,
@@ -530,6 +552,8 @@
 % The existing \Denv{blockquote} environment is re-defined
 % for this purpose.
 %
+% \changes{v0.2}{2019/04/28}{Countered unexplained vertical space
+	after environment}
 %    \begin{macrocode}
 \renewenvironment{blockquote}{%
     \list{}{\leftmargin 0.5in}
@@ -570,6 +594,9 @@
 % \Dpkg{enotez} package\footnote{Refer to the \Dpkg{enotez}
 % documentation for instructions.}.
 %
+% \changes{v0.2}{2019/04/28}{Added environment}
+% \changes{v0.2}{2019/04/28}{Countered unexplained vertical space
+	after heading}
 %    \begin{macrocode}
 \newenvironment{notes}{%
     \begin{noindent}
@@ -605,6 +632,8 @@
 % \Dpkg{biblatex} package\footnote{Refer to the \Dpkg{biblatex}
 % documentation for instructions.}.
 %
+% \changes{v0.2}{2019/04/28}{Countered unexplained vertical space
+	after heading}
 %    \begin{macrocode}
 \newenvironment{workscited}{%
     \begin{noindent}
