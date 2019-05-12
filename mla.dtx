@@ -38,6 +38,7 @@
 \newcommand*{\Dfile}[1]{\texttt{#1}}
 \newcommand*{\Dopt}[1]{\textsf{\small #1}}
 \newcommand*{\Dctr}[1]{\textsl{\small #1}}
+\newcommand*{\Dlst}[1]{\texttt{#1}}
 \newcommand*{\Denv}[1]{\texttt{#1}}
 \newcommand*{\Dcls}[1]{\textsf{#1}}
 \newcommand*{\Dpkg}[1]{\textsf{#1}}
@@ -288,8 +289,10 @@
 % \changes{v0.3}{2019/05/07}{Replaced obsolete \Dpkg{times} package
 %	with \Dpkg{newtxtext}}
 % \changes{v0.4}{2019/05/11}{Added \Dpkg{microtype} package}
+% \changes{v0.4}{2019/05/12}{Added \Dpkg{enumitem} package}
 %    \begin{macrocode}
 \RequirePackage{enotez}
+\RequirePackage{enumitem}
 \RequirePackage{fancyhdr}
 \RequirePackage{fullpage}
 \RequirePackage{indentfirst}
@@ -646,6 +649,8 @@
 % \changes{v0.2}{2019/04/28}{Added environment}
 % \changes{v0.2}{2019/04/28}{Countered unexplained vertical space
 %	after heading}
+% \changes{v0.4}{2019/05/12}{Changed endnotes list type to
+%	custom \Dlst{mlaendnotes} list}
 %    \begin{macrocode}
 \newenvironment{notes}{%
     \begin{noindent}
@@ -659,17 +664,30 @@
 %    \end{macrocode}
 % \end{environment}
 %
-% The following code is to format endnotes per
-% common practice\footnote{According to the popular, oft-referenced
-% \ac{OWL}: \citeurl{owlendnotes}.}
-% when using the \Dpkg{enotez} package.
+% To correctly format endnotes per common practice\footnote{According
+% to the popular, oft-referenced \ac{OWL}: \citeurl{owlendnotes}.},
+% a custom \Dlst{mlanotes} list type will be created.
+% This is acheived with the \Dpkg{enumitem} package.
 %
 %    \begin{macrocode}
-\setenotez{list-name={}}
+\newlist{mlanotes}{description}{1}
+\setlist[mlanotes]{%
+    parsep=0pt,
+    itemsep=0pt,
+    topsep=0pt,
+    leftmargin=\parindent
+}
+%    \end{macrocode}
+%
+% The following initializes the \Dpkg{enotez} package to use
+% the \Dlst{mlanotes} list format.
+%
+%    \begin{macrocode}
+\setenotez{list-name={},list-style=plain}
 \DeclareInstance{enotez-list}{mla}{list}{%
     heading = {},
     format = \normalsize\normalfont,
-    list-type = description
+    list-type = mlanotes
 }
 %    \end{macrocode}
 %
