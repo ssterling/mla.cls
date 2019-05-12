@@ -488,8 +488,20 @@
 % \subsection{The header}
 % \label{sec:the_header}
 %
+% \begin{macro}{\title}
+% \begin{macro}{\author}
+% \begin{macro}{\date}
 % The \cs{title}, \cs{author} and \cs{date} macros work as expected.
-% The following, however, are unique to the \Dcls{mla} class.
+% However, if your surname contains a space, you must contain the
+% surname in braces as such:
+% {\small |\author{Ludwig {van Beethoven}}|}.
+% This keeps the full surname in the running head (see
+% section~\ref{sec:running_head}).
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% The following header commands are unique to the \Dcls{mla} class.
 %
 % \begin{macro}{\professor}
 % The instructor who assigned the paper, i.e.
