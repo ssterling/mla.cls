@@ -117,6 +117,9 @@
 \GlossaryPrologue{\pdfbookmark[0]{Change history}{ch}
 	\section*{Change history}}
 
+%% Everything just looks better, in my opinion
+\usepackage{microtype}
+
 %% Comment this if you don't want to produce a changelog
 \AtEndDocument{\PrintChanges}
 
@@ -183,7 +186,9 @@
 % and version 1.3c or later is part of all distributions
 % of \LaTeX\ version 2008/05/04 or later.
 %
+% \microtypesetup{protrusion=false}
 % \tableofcontents
+% \microtypesetup{protrusion=true}
 %
 % \StopEventually{} ^^A
 %
@@ -282,12 +287,14 @@
 %
 % \changes{v0.3}{2019/05/07}{Replaced obsolete \Dpkg{times} package
 %	with \Dpkg{newtxtext}}
+% \changes{v0.4}{2019/05/11}{Added \Dpkg{microtype} package}
 %    \begin{macrocode}
 \RequirePackage{enotez}
 \RequirePackage{fancyhdr}
 \RequirePackage{fullpage}
 \RequirePackage{indentfirst}
 \RequirePackage{ragged2e}
+\RequirePackage{microtype}
 \RequirePackage{newtxtext}
 \RequirePackage{titlesec}
 \RequirePackage{xstring}
