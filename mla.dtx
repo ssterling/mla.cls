@@ -595,6 +595,38 @@
 % The solution \Dpkg{indentfirst} package was already loaded
 % in section~\ref{sec:loading_packages}.
 %
+% \subsection{Lists}
+% \label{sec:lists}
+%
+% \begin{environment}{itemize}
+% \changes{v0.4}{2019/05/12}{Added list type}
+% \begin{environment}{enumerate}
+% \changes{v0.4}{2019/05/12}{Added list type}
+% To the user, \Dlst{itemize} and \Dlst{enumerate} lists
+% will function exactly as expected.
+% However, the formatting of the lists must be modified as to
+% preserve double-spacing and adhere to
+% common practice\footnote{According to the \ac{MLA} itself:
+% \url{https://style.mla.org/vertical-lists-in-mla-style/}.};
+% these changes are acheived using the \Dpkg{enumitem} package.
+%
+%    \begin{macrocode}
+\setlist[itemize]{%
+    parsep=0pt,
+    itemsep=0pt,
+    topsep=0pt,
+    leftmargin=\parindent
+}
+\setlist[enumerate]{%
+    parsep=0pt,
+    itemsep=0pt,
+    topsep=0pt,
+    leftmargin=\parindent
+}
+%    \end{macrocode}
+% \end{environment}
+% \end{environment}
+%
 % \subsection{Block quotation}
 % \label{sec:block_quoatation}
 %
