@@ -347,6 +347,21 @@
 % \ac{MLA} format\footnote{According to the popular, oft-referenced
 % \ac{OWL}: \citeurl{owlmla}.}.
 %
+% \subsubsection{Microtype}
+% \label{sec:microtype}
+%
+% The \Dpkg{microtype} package (as loaded in
+% section~\ref{sec:loading_packages})
+% will marginally offset the burden of using Times
+% by correcting its ugly kerning and tracking.
+% The vague \Dopt{activate=false} below simply disables
+% protrusion, maintaining original line and page breaks.
+%
+% \changes{v0.4}{2019/05/12}{Disabled \Dpkg{microtype} protrusion}
+%    \begin{macrocode}
+\microtypesetup{activate=false}
+%    \end{macrocode}
+%
 % \subsection{Line breaking and spacing}
 % \label{sec:line_breaking}
 %
