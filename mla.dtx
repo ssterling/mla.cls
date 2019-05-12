@@ -651,6 +651,8 @@
 %	after heading}
 % \changes{v0.4}{2019/05/12}{Changed endnotes list type to
 %	custom \Dlst{mlaendnotes} list}
+% \changes{v0.4}{2019/05/12}{Changed default endnotes format
+%	to \Dlst{mla}}
 %    \begin{macrocode}
 \newenvironment{notes}{%
     \begin{noindent}
@@ -683,12 +685,12 @@
 % the \Dlst{mlanotes} list format.
 %
 %    \begin{macrocode}
-\setenotez{list-name={},list-style=plain}
 \DeclareInstance{enotez-list}{mla}{list}{%
     heading = {},
     format = \normalsize\normalfont,
     list-type = mlanotes
 }
+\setenotez{list-name={},list-style=mla}
 %    \end{macrocode}
 %
 % \subsubsection{Bibliography}
