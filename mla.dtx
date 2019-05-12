@@ -685,13 +685,13 @@
 %	custom \Dlst{mlaendnotes} list}
 % \changes{v0.4}{2019/05/12}{Changed default endnotes format
 %	to \Dlst{mla}}
+% \changes{v0.4}{2019/05/12}{Removed extra \cs{vspace}}
 %    \begin{macrocode}
 \newenvironment{notes}{%
     \begin{noindent}
         \pdfbookmark[0]{Notes}{notes}
         \begin{center}Notes\end{center}
     \end{noindent}
-    \vspace{-16pt} % XXX to counter unexplained space
 }{%
     \newpage
 }
