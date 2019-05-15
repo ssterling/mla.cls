@@ -206,7 +206,9 @@
 % \begin{macro}{\mladate}
 % The \citetitle{mlahb} requires use of the \term{day month year}
 % date format, not \TeX 's standard \term{month day, year}.
-% The macro \cs{mladate} will format \cs{date} accordingly.
+% The macro \cs{mladate} will format \cs{today} accordingly
+% to be used as the default value for \cs{date}
+% (see section~\ref{sec:the_header}).
 %
 % \changes{v0.2}{2019/05/02}{Added macro}
 %    \begin{macrocode}
@@ -522,30 +524,32 @@
 % \end{macro}
 %
 % To prevent undefined behavior, the internal macros used
-% to store the above information are set empty (except for \cs{date}).
+% to store the above information are set empty, except for \cs{date}.
+% (Note the use of \cs{mladate}; see section~\ref{sec:initial_code}.)
 %
 %    \begin{macrocode}
 \title{}
 \author{}
 \professor{}
 \course{}
-\date{\today}
+\date{\mladate}
 %    \end{macrocode}
 % 
 % \begin{macro}{\makemlaheader}
 % This command finally prints out the standard four-line
 % \ac{MLA} header, as well as the title.
-% (Note the use of \cs{mladate}; see section~\ref{sec:initial_code}.)
 %
 % \changes{v0.2}{2019/05/02}{Changed date format to
 %	\term{day month year}}
+% \changes{v0.5}{2019/05/15}{Changed date format back to whatever
+%	is inside \cs{@date}}
 %    \begin{macrocode}
 \newcommand{\makemlaheader}{%
     \begin{noindent}
         \@author \\
         \@professor \\
         \@course \\
-        \mladate \\
+        \@date \\
         \begin{center}\@title\end{center}
     \end{noindent}
 }
