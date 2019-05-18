@@ -134,7 +134,7 @@
 %
 % \fi
 %
-% \CheckSum{230}
+% \CheckSum{231}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -563,6 +563,14 @@
 \renewcommand{\maketitle}{\makemlaheader}
 %    \end{macrocode}
 %
+% Finally, the header will print at the beginning of every document.
+%
+% \changes{v0.5}{2019/05/18}{Moved header-printing process to
+%	\cs{AtBeginDocument}}
+%    \begin{macrocode}
+\AtBeginDocument{\maketitle}
+%    \end{macrocode}
+%
 % \subsection{Sectioning}
 % \label{sec:sectioning}
 %
@@ -675,13 +683,12 @@
 %
 % \begin{environment}{paper}
 % The main content; the body.
-% This environment produces the \ac{MLA} header at the top.
+% This environment exists only for a logical division and does
+% nothing special.
 %
 % \changes{v0.5}{2019/05/18}{Removed \cs{newpage}}
 %    \begin{macrocode}
-\newenvironment{paper}{%
-    \makemlaheader
-}{}
+\newenvironment{paper}{}{}
 %    \end{macrocode}
 % \end{environment}
 %
