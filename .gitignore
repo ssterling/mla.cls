@@ -11,7 +11,10 @@ Session.vim
 *.bcf
 *.blg
 *.glo
+*.gls
 *.idx
+*.ilg
+*.ind
 *.log
 *.out
 *.toc
