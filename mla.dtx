@@ -134,7 +134,7 @@
 %
 % \fi
 %
-% \CheckSum{231}
+% \CheckSum{256}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -232,6 +232,27 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% The following commands will toggle the on/off status of certain
+% features and options by defining and un-defining certain macros.
+%
+%    \begin{macrocode}
+\newcommand{\useMlaSeven}{%
+    \def\@useMlaSeven
+    \let\@useMlaEight\undefined
+    \let\@useMlaEightAlt\undefined
+}
+\newcommand{\useMlaEight}{%
+    \let\@useMlaSeven\undefined
+    \def\@useMlaEight
+    \let\@useMlaEightAlt\undefined
+}
+\newcommand{\useMlaEightAlt}{%
+    \let\@useMlaSeven\undefined
+    \let\@useMlaEight\undefined
+    \def\@useMlaEightAlt
+}
+%    \end{macrocode}
+%
 % \section{Options}
 % \label{sec:options}
 %
@@ -245,9 +266,11 @@
 %
 % \changes{v0.3}{2019/05/06}{Improved options parsing to avoid
 %	contradiction and undefined behavior}
+% \changes{v0.5}{2019/05/21}{Changed options parser to use
+%	toggle-switch commands in the style of default \LaTeX\ classes}
 %    \begin{macrocode}
-\DeclareOption{mla7}{\def\@optMlaSeven}
-\DeclareOption{mla8}{\def\@optMlaEight}
+\DeclareOption{mla7}{\useMlaSeven}
+\DeclareOption{mla8}{\useMlaEight}
 %    \end{macrocode}
 %
 % \changes{v0.3}{2019/05/07}{Added \Dopt{mla8alt} option}
@@ -256,7 +279,7 @@
 % In this case, one can specify \Dopt{mla8alt}
 % to the \Dcls{mla} class.
 %    \begin{macrocode}
-\DeclareOption{mla8alt}{\def\@optMlaEightAlt}
+\DeclareOption{mla8alt}{\useMlaEightAlt}
 %    \end{macrocode}
 %
 % \subsection{Processing}
@@ -319,21 +342,19 @@
 % And finally, \Dpkg{biblatex}.
 % The \Dcls{mla} class options dictate what options are passed to
 % \Dpkg{biblatex}, hence the \term{if-then} clauses.
-% Due to the nature of the code, earlier editions specified
-% will override later versions (this will later be fixed).
 %
 %    \begin{macrocode}
-\ifdefined\@optMlaSeven
+\ifdefined\@useMlaSeven
     \RequirePackage[style=mla,noremoteinfo=false,showmedium=true,
                     backend=biber]{biblatex}
-\else
-    \ifdefined\@optMlaEightAlt
-        \RequirePackage[style=mla,noremoteinfo=false,
-                        showmedium=false,backend=biber]{biblatex}
-    \else\ifdefined\@optMlaEight
-        \RequirePackage[style=mla-new,noremoteinfo=false,
-                        showmedium=false,backend=biber]{biblatex}
-    \fi\fi
+\fi
+\ifdefined\@useMlaEight
+    \RequirePackage[style=mla-new,noremoteinfo=false,
+                    showmedium=false,backend=biber]{biblatex}
+\fi
+\ifdefined\@useMlaEightAlt
+    \RequirePackage[style=mla,noremoteinfo=false,
+                    showmedium=false,backend=biber]{biblatex}
 \fi
 %    \end{macrocode}
 %
