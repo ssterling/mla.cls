@@ -31,7 +31,7 @@ To read the documentation, run `mla.dtx` through LaTeX:
 $ pdflatex mla.dtx
 $ gv mla.dtx
 ```
-(If you're getting this package from [CTAN](https://ctan.org),
+(If you're getting this package from [CTAN](https://ctan.org/pkg/mlacls),
 a file called `mla.pdf` should already be provided.)
 
 For an example file, refer to `mla-example.tex` and `mla-example.bib`,
