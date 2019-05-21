@@ -46,16 +46,6 @@
 %% Needed for the appendix
 \usepackage{verbatim}
 
-%% Fancy PDF
-\usepackage[hidelinks]{hyperref}
-\hypersetup{
-    pdfinfo={
-        Title=The MLA class,
-        Author=Seth Price,
-        Creator=LaTeX
-    }
-}
-
 %% A couple things are cited in the docs
 \usepackage{filecontents}
 \begin{filecontents}{mla.bib}
@@ -121,6 +111,16 @@
 %% Everything just looks better, in my opinion
 \usepackage{microtype}
 
+%% Fancy PDF
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    pdfinfo={
+        Title=The MLA class,
+        Author=Seth Price,
+        Creator=LaTeX
+    }
+}
+
 %% Comment this if you don't want to produce a changelog
 \AtEndDocument{\PrintChanges}
 
@@ -134,7 +134,7 @@
 %
 % \fi
 %
-% \CheckSum{256}
+% \CheckSum{257}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -336,7 +336,6 @@
 \RequirePackage[american]{babel}
 \RequirePackage{csquotes}
 \RequirePackage{hanging}
-\RequirePackage[hidelinks,pdfusetitle]{hyperref}
 %    \end{macrocode}
 %
 % And finally, \Dpkg{biblatex}.
@@ -356,6 +355,14 @@
     \RequirePackage[style=mla,noremoteinfo=false,
                     showmedium=false,backend=biber]{biblatex}
 \fi
+%    \end{macrocode}
+%
+% For some reason, common practice is to load \Dpkg{hyperref} last
+% of all packages.
+%
+%    \begin{macrocode}
+\RequirePackage{hyperref}
+\hypersetup{hidelinks,pdfusetitle}
 %    \end{macrocode}
 %
 % \section{Document layout}
