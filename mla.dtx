@@ -89,6 +89,7 @@
 \DeclareAcronym{OWL}{short=OWL,long=Purdue Online Writing Lab}
 \DeclareAcronym{PDF}{short=PDF,long=Portable Document Format}
 \DeclareAcronym{LPPL}{short=LPPL,long=\LaTeX\ Project Public License}
+\DeclareAcronym{SE}{short=SE,long=Stack Exchange}
 
 %% For a few different things
 %%\usepackage{semantic-markup}
@@ -136,7 +137,7 @@
 %
 % \fi
 %
-% \CheckSum{257}
+% \CheckSum{294}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -317,11 +318,17 @@
 %	with \Dpkg{newtxtext}}
 % \changes{v0.4}{2019/05/11}{Added \Dpkg{microtype} package}
 % \changes{v0.4}{2019/05/12}{Added \Dpkg{enumitem} package}
+% \changes{v0.6}{2019/05/29}{Added \Dpkg{caption} package}
+% \changes{v0.6}{2019/05/29}{Added \Dpkg{graphicx} package}
+% \changes{v0.6}{2019/05/29}{Added \Dpkg{float} package}
 %    \begin{macrocode}
+\RequirePackage{caption}
 \RequirePackage{enotez}
 \RequirePackage{enumitem}
 \RequirePackage{fancyhdr}
+\RequirePackage{float}
 \RequirePackage{fullpage}
+\RequirePackage{graphicx}
 \RequirePackage{indentfirst}
 \RequirePackage{ragged2e}
 \RequirePackage{microtype}
@@ -429,11 +436,13 @@
 % The \citetitle{mlahb} specifies half-inch first-line indentation
 % for each paragraph and no extra spacing in between.
 %
+% \changes{v0.6}{2019-05-29}{Explicitly set \cs{partopset} to 0pt}
 %    \begin{macrocode}
 \setlength{\parindent}{0.5in}
 \setlength{\RaggedRightParindent}{\parindent}
 \setlength{\parskip}{0em}
 \setlength{\topsep}{0em}
+\setlength{\partopsep}{0em}
 %    \end{macrocode}
 %
 % And, for the sake of consistent 24-line papers,
@@ -703,6 +712,76 @@
     \vspace{-\topsep}
 }
 %    \end{macrocode}
+% \end{environment}
+%
+% \subsection{Figures and tables}
+% \label{sec:figures}
+%
+% The \citetitle{mlahb} doesn't specify much of anything about
+% the actual formatting of figures or tables or their captions,
+% so the following is mostly based on the package author's
+% personal preference and observations.
+%
+% \begin{environment}{figure}
+% \changes{v0.6}{2019/05/29}{Properly formatted}
+% \begin{environment}{table}
+% \changes{v0.6}{2019/05/29}{Properly formatted}
+%
+% Centered figures with margins the equivalent of one line of text
+% seems customary and logical.
+%
+%    \begin{macrocode}
+\setlength{\floatsep}{\baselineskip}
+\setlength{\intextsep}{\baselineskip}
+\setlength{\textfloatsep}{\baselineskip}
+\g@addto@macro\@floatboxreset\centering
+%    \end{macrocode}
+%
+% Thanks to a bug inherited from the \Dpkg{here} package
+% which has remained unfixed since 1987\footnote{See the \cs{par}
+% on p. 11, line 249 of \Dfile{ltfloat.dtx} from the \LaTeX\ kernel.},
+% there is not only extra space after the figure but the inability to
+% insert a figure within a paragraph.
+% Miraculously, there is a fix for this\footnote{See David Carlisle's
+% answer on \TeX\ \acs{SE}:
+% \url{https://tex.stackexchange.com/a/310793}}.
+%
+%    \begin{macrocode}
+\renewcommand{\float@endH}{%
+    \vspace{-12pt}
+    \@endfloatbox\vskip\intextsep
+    \if@flstyle\setbox\@currbox\float@makebox\columnwidth\fi
+    \box\@currbox\vskip\intextsep\relax\@doendpe
+}
+%    \end{macrocode}
+%
+% \end{environment}
+% \end{environment}
+% 
+% \begin{environment}{caption}
+% \changes{v0.6}{2019/05/29}{Properly formatted}
+%
+% Un-fancifying the caption is acheived using the
+% \Dpkg{caption} package.
+%
+%    \begin{macrocode}
+\captionsetup{%
+    font={normalfont},
+    labelformat=simple,
+    labelsep=period,
+    position=bottom,
+    aboveskip=6pt,
+    belowskip=-10pt
+}
+%    \end{macrocode}
+%
+% In the author's personal experience, most \ac{MLA}-style papers
+% use \mentioned{Fig.} and not \mentioned{Figure}.
+%
+%    \begin{macrocode}
+\captionsetup[figure]{name=Fig.}
+%    \end{macrocode}
+%
 % \end{environment}
 %
 % \subsection{Paper sections}
