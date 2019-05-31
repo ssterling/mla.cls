@@ -137,7 +137,7 @@
 %
 % \fi
 %
-% \CheckSum{294}
+% \CheckSum{273}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -235,26 +235,19 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% The following commands will toggle the on/off status of certain
-% features and options by defining and un-defining certain macros.
+% \begin{macro}{\MLA@seven}
+% \begin{macro}{\MLA@eight}
+% \begin{macro}{\MLA@eightalt}
+% The following are true/false switches to toggle certain features.
 %
 %    \begin{macrocode}
-\newcommand{\useMlaSeven}{%
-    \def\@useMlaSeven
-    \let\@useMlaEight\undefined
-    \let\@useMlaEightAlt\undefined
-}
-\newcommand{\useMlaEight}{%
-    \let\@useMlaSeven\undefined
-    \def\@useMlaEight
-    \let\@useMlaEightAlt\undefined
-}
-\newcommand{\useMlaEightAlt}{%
-    \let\@useMlaSeven\undefined
-    \let\@useMlaEight\undefined
-    \def\@useMlaEightAlt
-}
+\newif\ifMLA@seven
+\newif\ifMLA@eight
+\newif\ifMLA@eightalt
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
 %
 % \section{Options}
 % \label{sec:options}
@@ -271,9 +264,11 @@
 %	contradiction and undefined behavior}
 % \changes{v0.5}{2019/05/21}{Changed options parser to use
 %	toggle-switch commands in the style of default \LaTeX\ classes}
+% \changes{v0.7}{2019/05/30}{Changed options parser to use
+%	\cs{ifMLA@\ldots} toggle format seen in other classes}
 %    \begin{macrocode}
-\DeclareOption{mla7}{\useMlaSeven}
-\DeclareOption{mla8}{\useMlaEight}
+\DeclareOption{mla7}{\MLA@seventrue\MLA@eightfalse\MLA@eightaltfalse}
+\DeclareOption{mla8}{\MLA@sevenfalse\MLA@eighttrue\MLA@eightaltfalse}
 %    \end{macrocode}
 %
 % \changes{v0.3}{2019/05/07}{Added \Dopt{mla8alt} option}
@@ -282,7 +277,7 @@
 % In this case, one can specify \Dopt{mla8alt}
 % to the \Dcls{mla} class.
 %    \begin{macrocode}
-\DeclareOption{mla8alt}{\useMlaEightAlt}
+\DeclareOption{mla8alt}{\MLA@sevenfalse\MLA@eightfalse\MLA@eightalttrue}
 %    \end{macrocode}
 %
 % \subsection{Processing}
@@ -352,15 +347,15 @@
 % \Dpkg{biblatex}, hence the \term{if-then} clauses.
 %
 %    \begin{macrocode}
-\ifdefined\@useMlaSeven
+\ifMLA@seven
     \RequirePackage[style=mla,noremoteinfo=false,showmedium=true,
                     backend=biber]{biblatex}
 \fi
-\ifdefined\@useMlaEight
+\ifMLA@eight
     \RequirePackage[style=mla-new,noremoteinfo=false,
                     showmedium=false,backend=biber]{biblatex}
 \fi
-\ifdefined\@useMlaEightAlt
+\ifMLA@eightalt
     \RequirePackage[style=mla,noremoteinfo=false,
                     showmedium=false,backend=biber]{biblatex}
 \fi
