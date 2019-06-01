@@ -137,7 +137,7 @@
 %
 % \fi
 %
-% \CheckSum{273}
+% \CheckSum{276}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -324,7 +324,6 @@
 \RequirePackage{float}
 \RequirePackage{fullpage}
 \RequirePackage{graphicx}
-\RequirePackage{indentfirst}
 \RequirePackage{ragged2e}
 \RequirePackage{microtype}
 \RequirePackage{newtxtext}
@@ -429,7 +428,7 @@
 % \label{sec:paragraphing}
 %
 % The \citetitle{mlahb} specifies half-inch first-line indentation
-% for each paragraph and no extra spacing in between.
+% for every paragraph and no extra spacing in between.
 %
 % \changes{v0.6}{2019-05-29}{Explicitly set \cs{partopset} to 0pt}
 %    \begin{macrocode}
@@ -438,6 +437,16 @@
 \setlength{\parskip}{0em}
 \setlength{\topsep}{0em}
 \setlength{\partopsep}{0em}
+%    \end{macrocode}
+%
+% \TeX\ does not indent the first paragraph after headings by default.
+% Thankfully, the fix for this is simple.
+%
+% \changes{v0.7}{2019/05/31}{Copied code from \Dpkg{indentfirst}
+%	to reduce dependency count}
+%    \begin{macrocode}
+\let\@afterindentfalse\@afterindenttrue
+\@afterindenttrue
 %    \end{macrocode}
 %
 % And, for the sake of consistent 24-line papers,
@@ -647,11 +656,6 @@
 % \end{macro}
 % \end{macro}
 % \end{macro}
-%
-% Under default configuration, \TeX\ doesn't indent the
-% first paragraph after a section heading, violating \ac{MLA} style.
-% The solution \Dpkg{indentfirst} package was already loaded
-% in section~\ref{sec:loading_packages}.
 %
 % \subsection{Lists}
 % \label{sec:lists}
