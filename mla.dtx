@@ -137,7 +137,7 @@
 %
 % \fi
 %
-% \CheckSum{276}
+% \CheckSum{284}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -238,13 +238,16 @@
 % \begin{macro}{\MLA@seven}
 % \begin{macro}{\MLA@eight}
 % \begin{macro}{\MLA@eightalt}
+% \begin{macro}{\MLA@microtype}
 % The following are true/false switches to toggle certain features.
 %
 %    \begin{macrocode}
 \newif\ifMLA@seven
 \newif\ifMLA@eight
 \newif\ifMLA@eightalt
+\newif\ifMLA@microtype
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -278,6 +281,13 @@
 % to the \Dcls{mla} class.
 %    \begin{macrocode}
 \DeclareOption{mla8alt}{\MLA@sevenfalse\MLA@eightfalse\MLA@eightalttrue}
+%    \end{macrocode}
+%
+% The \Dpkg{microtype} package can be optionally included
+% with the \Dopt{microtype} option to offset the pain of using
+% the Times typeface.
+%    \begin{macrocode}
+\DeclareOption{microtype}{\MLA@microtypetrue}
 %    \end{macrocode}
 %
 % \subsection{Processing}
@@ -316,6 +326,8 @@
 % \changes{v0.6}{2019/05/29}{Added \Dpkg{caption} package}
 % \changes{v0.6}{2019/05/29}{Added \Dpkg{graphicx} package}
 % \changes{v0.6}{2019/05/29}{Added \Dpkg{float} package}
+% \changes{v0.7}{2019/06/01}{Changed \Dpkg{microtype} package
+%	to only load through \Dopt{microtype} class option}
 %    \begin{macrocode}
 \RequirePackage{caption}
 \RequirePackage{enotez}
@@ -325,7 +337,6 @@
 \RequirePackage{fullpage}
 \RequirePackage{graphicx}
 \RequirePackage{ragged2e}
-\RequirePackage{microtype}
 \RequirePackage{newtxtext}
 \RequirePackage{titlesec}
 \RequirePackage{xstring}
@@ -360,6 +371,15 @@
 \fi
 %    \end{macrocode}
 %
+% The \Dpkg{microtype} package is loaded if the \Dopt{microtype}
+% option is specified.
+% 
+%    \begin{macrocode}
+\ifMLA@microtype
+    \RequirePackage{microtype}
+\fi
+%    \end{macrocode}
+%
 % For some reason, common practice is to load \Dpkg{hyperref} last
 % of all packages.
 %
@@ -386,7 +406,7 @@
 % \subsubsection{Microtype}
 % \label{sec:microtype}
 %
-% The \Dpkg{microtype} package (as loaded in
+% The \Dpkg{microtype} package (if loaded as in
 % section~\ref{sec:loading_packages})
 % will marginally offset the burden of using Times
 % by correcting its ugly kerning and tracking.
@@ -395,7 +415,9 @@
 %
 % \changes{v0.4}{2019/05/12}{Disabled \Dpkg{microtype} protrusion}
 %    \begin{macrocode}
-\microtypesetup{activate=false}
+\ifMLA@microtype
+    \microtypesetup{activate=false}
+\fi
 %    \end{macrocode}
 %
 % \subsection{Line breaking and spacing}
