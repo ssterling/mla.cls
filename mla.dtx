@@ -888,6 +888,7 @@
 % \changes{v0.2}{2019/04/28}{Countered unexplained vertical space
 %	after heading}
 % \changes{v0.5}{2019/05/18}{Moved \cs{newpage} to beginning of environment}
+% \changes{v0.7}{2019/08/30}{Changed correction spacing from 16pt to 12pt}
 %    \begin{macrocode}
 \newenvironment{workscited}{%
     \newpage
@@ -895,7 +896,7 @@
         \pdfbookmark[0]{Works Cited}{workscited}
         \begin{center}Works Cited\end{center}
     \end{noindent}
-    \vspace{-16pt} % XXX to counter unexplained space
+    \vspace{-12pt} % XXX to counter unexplained space
 }{}
 %    \end{macrocode}
 % \end{environment}
