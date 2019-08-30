@@ -137,7 +137,7 @@
 %
 % \fi
 %
-% \CheckSum{284}
+% \CheckSum{285}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -639,6 +639,8 @@
 % \subsection{Sectioning}
 % \label{sec:sectioning}
 %
+% \changes{v0.7}{2019/08/30}{Replaced regular space after dot
+%	in section headings with \cs{enspace}}
 % \begin{macro}{\section}
 % \changes{v0.2}{2019/05/02}{Changed heading to small-caps}
 % \begin{macro}{\subsection}
@@ -673,7 +675,7 @@
 \titlespacing*{\section}{0pt}{0pt}{0pt}
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
 \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
-\titlelabel{\thetitle. }
+\titlelabel{\thetitle.\enspace}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
