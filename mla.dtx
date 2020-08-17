@@ -27,7 +27,7 @@
 %<mla>\NeedsTeXFormat{LaTeX2e}
 %<mla>\ProvidesClass{mla}
 %<*mla>
-    [2019/09/30 v0.7 MLA Paper Class]
+    [2020/08/16 v0.8 MLA Paper Class]
 %</mla>
 
 %<*driver>
@@ -137,7 +137,7 @@
 %
 % \fi
 %
-% \CheckSum{286}
+% \CheckSum{299}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -670,14 +670,19 @@
 % Un-fancifying the headings is acheived using
 % the \Dpkg{titlesec} package.
 %
+% \changes{v0.8}{2020/08/16}{Removed extraneous spacing and newlines
+%	in section headings}
 %    \begin{macrocode}
-\titleformat*{\section}{\normalsize\sc}
-\titleformat*{\subsection}{\normalsize\sc}
-\titleformat*{\subsubsection}{\normalsize\sc}
+\titleformat{\section}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
+\titleformat{\subsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
+\titleformat{\subsubsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
 \titlespacing*{\section}{0pt}{0pt}{0pt}
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
 \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
-\titlelabel{\thetitle.\enspace}
+\titlelabel{}
+\patchcmd{\ttl@select}{\strut}{}{}{}
+\patchcmd{\ttlh@hang}{\strut}{}{}{}
+\patchcmd{\ttlh@hang}{\strut}{}{}{}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
