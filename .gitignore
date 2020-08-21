@@ -6,6 +6,7 @@ Session.vim
 .*.un~
 
 # Auxiliary files
+*.acr
 *.aux
 *.bbl
 *.bcf
