@@ -643,6 +643,8 @@
 %
 % \changes{v0.7}{2019/08/30}{Replaced regular space after dot
 %	in section headings with \cs{enspace}}
+% \changes{v0.8}{2020/08/16}{Removed extraneous spacing and newlines
+%	in section headings}
 % \begin{macro}{\section}
 % \changes{v0.2}{2019/05/02}{Changed heading to small-caps}
 % \begin{macro}{\subsection}
@@ -670,8 +672,6 @@
 % Un-fancifying the headings is acheived using
 % the \Dpkg{titlesec} package.
 %
-% \changes{v0.8}{2020/08/16}{Removed extraneous spacing and newlines
-%	in section headings}
 %    \begin{macrocode}
 \titleformat{\section}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
 \titleformat{\subsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
