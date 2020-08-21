@@ -27,7 +27,7 @@
 %<mla>\NeedsTeXFormat{LaTeX2e}
 %<mla>\ProvidesClass{mla}
 %<*mla>
-    [2020/08/16 v0.8 MLA Paper Class]
+    [2020/08/20 v0.9 MLA Paper Class]
 %</mla>
 
 %<*driver>
@@ -137,7 +137,7 @@
 %
 % \fi
 %
-% \CheckSum{299}
+% \CheckSum{325}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -240,6 +240,8 @@
 % \begin{macro}{\MLA@seven}
 % \begin{macro}{\MLA@eight}
 % \begin{macro}{\MLA@eightalt}
+% \begin{macro}{\MLA@figures}
+% \begin{macro}{\MLA@notes}
 % \begin{macro}{\MLA@microtype}
 % The following are true/false switches to toggle certain features.
 %
@@ -247,8 +249,12 @@
 \newif\ifMLA@seven
 \newif\ifMLA@eight
 \newif\ifMLA@eightalt
+\newif\ifMLA@figures
+\newif\ifMLA@notes
 \newif\ifMLA@microtype
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -283,6 +289,17 @@
 % to the \Dcls{mla} class.
 %    \begin{macrocode}
 \DeclareOption{mla8alt}{\MLA@sevenfalse\MLA@eightfalse\MLA@eightalttrue}
+%    \end{macrocode}
+%
+% For those who do not plan on using figures and/or footnotes,
+% some time (and dependency disk space) might be saved by using the
+% \Dopt{nofigures} and/or \Dopt{nonotes} options, as they are enabled
+% by default.
+%    \begin{macrocode}
+\MLA@figurestrue
+\MLA@notestrue
+\DeclareOption{nofigures}{\MLA@figuresfalse}
+\DeclareOption{nonotes}{\MLA@notesfalse}
 %    \end{macrocode}
 %
 % The \Dpkg{microtype} package can be optionally included
@@ -330,14 +347,12 @@
 % \changes{v0.6}{2019/05/29}{Added \Dpkg{float} package}
 % \changes{v0.7}{2019/06/01}{Changed \Dpkg{microtype} package
 %	to only load through \Dopt{microtype} class option}
+% \changes{v0.9}{2020/08/20}{Added \Dopt{nofigures} and \Dopt{nonotes}
+%	options to prevent loading unused dependencies}
 %    \begin{macrocode}
-\RequirePackage{caption}
-\RequirePackage{enotez}
 \RequirePackage{enumitem}
 \RequirePackage{fancyhdr}
-\RequirePackage{float}
 \RequirePackage{fullpage}
-\RequirePackage{graphicx}
 \RequirePackage{ragged2e}
 \RequirePackage{newtxtext}
 \RequirePackage{titlesec}
@@ -370,6 +385,27 @@
 \ifMLA@eightalt
     \RequirePackage[style=mla,noremoteinfo=false,
                     showmedium=false,backend=biber]{biblatex}
+\fi
+%    \end{macrocode}
+%
+% The \Dpkg{caption}, \Dpkg{float} and \Dpkg{graphicx} packages
+% are loaded by default, but can be disabled using the
+% \Dopt{nofigures} option.
+%
+%    \begin{macrocode}
+\ifMLA@figures
+    \RequirePackage{caption}
+    \RequirePackage{float}
+    \RequirePackage{graphicx}
+\fi
+%    \end{macrocode}
+%
+% Likewise, the \Dpkg{enotez} package can be disabled with
+% \Dopt{nonotes}.
+%
+%    \begin{macrocode}
+\ifMLA@notes
+    \RequirePackage{enotez}
 \fi
 %    \end{macrocode}
 %
@@ -761,10 +797,12 @@
 % seems customary and logical.
 %
 %    \begin{macrocode}
-\setlength{\floatsep}{\baselineskip}
-\setlength{\intextsep}{\baselineskip}
-\setlength{\textfloatsep}{\baselineskip}
-\g@addto@macro\@floatboxreset\centering
+\ifMLA@figures
+    \setlength{\floatsep}{\baselineskip}
+    \setlength{\intextsep}{\baselineskip}
+    \setlength{\textfloatsep}{\baselineskip}
+    \g@addto@macro\@floatboxreset\centering
+\fi
 %    \end{macrocode}
 %
 % Thanks to a bug inherited from the \Dpkg{here} package
@@ -777,12 +815,14 @@
 % \url{https://tex.stackexchange.com/a/310793}}.
 %
 %    \begin{macrocode}
-\renewcommand{\float@endH}{%
-    \vspace{-12pt}
-    \@endfloatbox\vskip\intextsep
-    \if@flstyle\setbox\@currbox\float@makebox\columnwidth\fi
-    \box\@currbox\vskip\intextsep\relax\@doendpe
-}
+\ifMLA@figures
+    \renewcommand{\float@endH}{%
+        \vspace{-12pt}
+        \@endfloatbox\vskip\intextsep
+        \if@flstyle\setbox\@currbox\float@makebox\columnwidth\fi
+        \box\@currbox\vskip\intextsep\relax\@doendpe
+    }
+\fi
 %    \end{macrocode}
 %
 % \end{environment}
@@ -795,21 +835,25 @@
 % \Dpkg{caption} package.
 %
 %    \begin{macrocode}
-\captionsetup{%
-    font={normalfont},
-    labelformat=simple,
-    labelsep=period,
-    position=bottom,
-    aboveskip=6pt,
-    belowskip=-10pt
-}
+\ifMLA@figures
+    \captionsetup{%
+        font={normalfont},
+        labelformat=simple,
+        labelsep=period,
+        position=bottom,
+        aboveskip=6pt,
+        belowskip=-10pt
+    }
+\fi
 %    \end{macrocode}
 %
 % In the author's personal experience, most \ac{MLA}-style papers
 % use \mentioned{Fig.} and not \mentioned{Figure}.
 %
 %    \begin{macrocode}
-\captionsetup[figure]{name=Fig.}
+\ifMLA@figures
+    \captionsetup[figure]{name=Fig.}
+\fi
 %    \end{macrocode}
 %
 % \end{environment}
@@ -865,25 +909,29 @@
 % This is acheived with the \Dpkg{enumitem} package.
 %
 %    \begin{macrocode}
-\newlist{mlanotes}{description}{1}
-\setlist[mlanotes]{%
-    parsep=0pt,
-    itemsep=0pt,
-    topsep=0pt,
-    leftmargin=\parindent
-}
+\ifMLA@notes
+    \newlist{mlanotes}{description}{1}
+    \setlist[mlanotes]{%
+        parsep=0pt,
+        itemsep=0pt,
+        topsep=0pt,
+        leftmargin=\parindent
+    }
+\fi
 %    \end{macrocode}
 %
 % The following initializes the \Dpkg{enotez} package to use
 % the \Dlst{mlanotes} list format.
 %
 %    \begin{macrocode}
-\DeclareInstance{enotez-list}{mla}{list}{%
-    heading = {},
-    format = \normalsize\normalfont,
-    list-type = mlanotes
-}
-\setenotez{list-name={},list-style=mla,backref}
+\ifMLA@notes
+    \DeclareInstance{enotez-list}{mla}{list}{%
+        heading = {},
+        format = \normalsize\normalfont,
+        list-type = mlanotes
+    }
+    \setenotez{list-name={},list-style=mla,backref}
+\fi
 %    \end{macrocode}
 %
 % \subsubsection{Bibliography}
