@@ -672,6 +672,8 @@
 %	is inside \cs{@date}}
 % \changes{v0.9}{2020/10/05}{Changed to ignore (not print) undefined
 %	header macros}
+% \changes{v0.9}{2020/10/05}{Fix weird bug where paragraph immediately
+%	after \cs{begin\{paper\}} (with no newline) is not indented}
 %    \begin{macrocode}
 \newcommand{\makemlaheader}{%
     \begin{noindent}
@@ -681,6 +683,7 @@
 	\ifx\@date\@empty\else\@date\\\fi
         \ifx\@title\@empty\else\begin{center}\@title\end{center}\fi
     \end{noindent}
+    % for some reason, this blank line is necessary
 }
 %    \end{macrocode}
 % \end{macro}
