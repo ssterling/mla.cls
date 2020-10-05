@@ -131,7 +131,7 @@
 %
 % \fi
 %
-% \CheckSum{374}
+% \CheckSum{391}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -239,6 +239,7 @@
 % \begin{macro}{\MLA@microtype}
 % \begin{macro}{\MLA@paperheader}
 % \begin{macro}{\MLA@pageheader}
+% \begin{macro}{\MLA@plainheadings}
 % The following are true/false switches to toggle certain features.
 %
 %    \begin{macrocode}
@@ -250,7 +251,9 @@
 \newif\ifMLA@microtype
 \newif\ifMLA@paperheader
 \newif\ifMLA@pageheader
+\newif\ifMLA@plainheadings
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -323,6 +326,16 @@
 \DeclareOption{nopaperheader}{\MLA@paperheaderfalse}
 \DeclareOption{nopageheader}{\MLA@pageheaderfalse}
 \DeclareOption{noheaders}{\MLA@paperheaderfalse\MLA@pageheaderfalse}
+%    \end{macrocode}
+%
+% \changes{v0.9}{2020/10/05}{Added \Dopt{plainheadings} option to
+%	forego small-caps and auto-numbering in section headings}
+% For professors and/or writers who desire to format the section
+% headings manually and individually (and forego \cs{titleformat\{\}},
+% the \Dopt{plainheadings} option may be used.
+%    \begin{macrocode}
+\MLA@plainheadingsfalse
+\DeclareOption{plainheadings}{\MLA@plainheadingstrue}
 %    \end{macrocode}
 %
 % \subsection{Processing}
@@ -730,7 +743,9 @@
 % the popular, oft-referenced \ac{OWL}: \citeurl{owlmla}.}.
 %
 % However, for the sake of clarity, the section headings in this class
-% will be set in small-caps.
+% will be set in small-caps by default.
+% Plain, unnumbered and entirely unformatted section headings can
+% be acheived using the \Dopt{plainheadings} option.
 %
 %    \begin{macrocode}
 \renewcommand{\thesection}{\@arabic\c@section}
@@ -742,9 +757,15 @@
 % the \Dpkg{titlesec} package.
 %
 %    \begin{macrocode}
-\titleformat{\section}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
-\titleformat{\subsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
-\titleformat{\subsubsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
+\ifMLA@plainheadings
+    \titleformat{\section}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
+    \titleformat{\subsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
+    \titleformat{\subsubsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
+\else
+    \titleformat{\section}[block]{\normalsize}{}{0pt}{}[]
+    \titleformat{\subsection}[block]{\normalsize}{}{0pt}{}[]
+    \titleformat{\subsubsection}[block]{\normalsize}{}{0pt}{}[]
+\fi
 \titlespacing*{\section}{0pt}{0pt}{0pt}
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
 \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
