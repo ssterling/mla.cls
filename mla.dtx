@@ -758,13 +758,13 @@
 %
 %    \begin{macrocode}
 \ifMLA@plainheadings
-    \titleformat{\section}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
-    \titleformat{\subsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
-    \titleformat{\subsubsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
-\else
     \titleformat{\section}[block]{\normalsize}{}{0pt}{}[]
     \titleformat{\subsection}[block]{\normalsize}{}{0pt}{}[]
     \titleformat{\subsubsection}[block]{\normalsize}{}{0pt}{}[]
+\else
+    \titleformat{\section}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
+    \titleformat{\subsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
+    \titleformat{\subsubsection}[block]{\normalsize\sc}{\thetitle.\enspace}{0pt}{}[]
 \fi
 \titlespacing*{\section}{0pt}{0pt}{0pt}
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
