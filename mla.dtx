@@ -27,7 +27,7 @@
 %<mla>\NeedsTeXFormat{LaTeX2e}
 %<mla>\ProvidesClass{mla}
 %<*mla>
-    [2020/10/05 v0.9 MLA Paper Class]
+    [2020/11/07 v0.9 MLA Paper Class]
 %</mla>
 
 %<*driver>
@@ -131,7 +131,7 @@
 %
 % \fi
 %
-% \CheckSum{391}
+% \CheckSum{401}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -240,6 +240,7 @@
 % \begin{macro}{\MLA@paperheader}
 % \begin{macro}{\MLA@pageheader}
 % \begin{macro}{\MLA@plainheadings}
+% \begin{macro}{\MLA@fullpage}
 % The following are true/false switches to toggle certain features.
 %
 %    \begin{macrocode}
@@ -252,7 +253,9 @@
 \newif\ifMLA@paperheader
 \newif\ifMLA@pageheader
 \newif\ifMLA@plainheadings
+\newif\ifMLA@fullpage
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -336,6 +339,17 @@
 %    \begin{macrocode}
 \MLA@plainheadingsfalse
 \DeclareOption{plainheadings}{\MLA@plainheadingstrue}
+%    \end{macrocode}
+%
+% \changes{v0.9}{2020/11/07}{Added \Dopt{fullpage} option to explicitly
+%	allow widows and orphans}
+% Another edge case is in which a professor may require strict 24-line
+% papers, i.\,e.\ explicitly allowing orphans and widows, enabled using
+% the \Dopt{fullpage} option\footnote{In versions of \Dcls{mlacls}
+% prior to v0.9, disallowing widows and orphans was default behavior.}.
+%    \begin{macrocode}
+\MLA@fullpagefalse
+\DeclareOption{fullpage}{\MLA@fullpagetrue}
 %    \end{macrocode}
 %
 % \subsection{Processing}
@@ -538,16 +552,24 @@
 \@afterindenttrue
 %    \end{macrocode}
 %
-% And, for the sake of consistent 24-line papers,
-% orphans and widows are explicitly allowed.
+% Orphans and widows are explicitly banned\footnote{According to the
+% \ac{MLA} itself: \url{https://style.mla.org/orphaned-words/}}.
+% For the odd case in which papers must be consistently 24 lines
+% (i.\,e.\ explicitly allowing orphans and widows), the
+% \Dopt{fullpage} option may be used.
 %
 %    \begin{macrocode}
-\widowpenalty=0
-\clubpenalty=0
-\interlinepenalty=0
+\ifMLA@fullpage
+    \widowpenalty=0
+    \clubpenalty=0
+    \interlinepenalty=0
+\else
+    \widowpenalty=10000
+    \clubpenalty=10000
+\fi
 %    \end{macrocode}
 %
-% For a final heinous crime against typesetting,
+% As a heinous crime against the art of typesetting,
 % the \citetitle{mlahb} advises flush-left/ragged-right alignment.
 % (This is acheived with the \Dpkg{ragged2e} package.)
 %
