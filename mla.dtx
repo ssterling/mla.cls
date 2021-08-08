@@ -241,6 +241,7 @@
 % \begin{macro}{\MLA@pageheader}
 % \begin{macro}{\MLA@plainheadings}
 % \begin{macro}{\MLA@fullpage}
+% \begin{macro}{\MLA@setfont}
 % The following are true/false switches to toggle certain features.
 %
 %    \begin{macrocode}
@@ -352,6 +353,11 @@
 \DeclareOption{fullpage}{\MLA@fullpagetrue}
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+\MLA@setfonttrue
+\DeclareOption{nosetfont}{\MLA@setfontfalse}
+%    \end{macrocode}
+%
 % \subsection{Processing}
 % \label{sec:processing}
 %
@@ -397,7 +403,6 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{fullpage}
 \RequirePackage{ragged2e}
-\RequirePackage{newtxtext}
 \RequirePackage{titlesec}
 \RequirePackage{xstring}
 %    \end{macrocode}
@@ -460,6 +465,12 @@
 %    \begin{macrocode}
 \ifMLA@microtype
     \RequirePackage{microtype}
+\fi
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\ifMLA@setfont
+    \RequirePackage{newtxtext}
 \fi
 %    \end{macrocode}
 %
