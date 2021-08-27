@@ -50,7 +50,7 @@ Once finished, move the output `mla.cls` to your local
 Authorship & licensing
 ----------------------
 
-`mlacls` copyright 2019 Seth Price (ssterling AT firemail DOT cc).
+`mlacls` copyright 2019 Seth Price (sprice623 AT aol DOT com).
 Released under the
 [LaTeX Project Public License v1.3c](https://www.latex-project.org/lppl/lppl-1-3c/).
 
