@@ -75,6 +75,13 @@
 	urldate = {2019-05-06},
 	url = {https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_endnotes_and_footnotes.html}
 }
+@online{mlafont,
+	title={Why does the {MLA} require the use of {T}imes {N}ew {R}oman? It’s a boring font.}
+	institution = {Modern Language Association of America},
+	howpublished = {Web},
+	urldate = {2016-02-24},
+	url = {https://style.mla.org/times-new-roman-is-a-boring-font/}
+}
 \end{filecontents}
 \usepackage[backend=biber]{biblatex}
 \addbibresource{mla.bib}
@@ -353,6 +360,13 @@
 \DeclareOption{fullpage}{\MLA@fullpagetrue}
 %    \end{macrocode}
 %
+% \changes{v0.10}{2021/09/19}{Added \Dopt{nosetfont} option to disable
+% automatically loading the \Dpkg{newtxtext} package}
+% If the professor is more lenient and does not require the Times New
+% Roman font, which is not explicitly required by the \ac{MLA} format
+% either, automatic loading of the \Dpkg{newtxtext} package can be
+% disabled with the \Dopt{nosetfont} option (see section~\ref{sec:font}
+% for more information).
 %    \begin{macrocode}
 \MLA@setfonttrue
 \DeclareOption{nosetfont}{\MLA@setfontfalse}
@@ -488,14 +502,18 @@
 % \subsection{Font}
 % \label{sec:font}
 %
-% The \Dpkg{newtxtext} package was already loaded in
-% section~\ref{sec:loading_packages},
-% and the font was set to 12pt when loading the \Dcls{article} class
-% in section~\ref{sec:initial_code}.
-% This should be metric-compatible with the infamous Times New Roman,
-% the \foreign{de facto} standard of the
-% \ac{MLA} format\footnote{According to the popular, oft-referenced
-% \ac{OWL}: \citeurl{owlmla}.}.
+% The font size was set to 12pt when loading the \Dcls{article} class
+% in section~\ref{sec:initial_code}. Unless the \Dopt{nosetfont}
+% option was used, the \Dpkg{newtxtext} package was loaded in
+% section~\ref{sec:loading_packages}, which should be
+% metric-compatible with the infamous Times New Roman, the
+% \foreign{de facto} standard of the \ac{MLA}
+% format\footnote{According to the popular, oft-referenced \ac{OWL}:
+% \citeurl{owlmla}.}. However, the only font requirements in \ac{MLA}
+% are that it is ``easily readable'' and that ``the regular type style
+% contrasts clearly with the italic''\footnote{As per \ac{MLA}'s own
+% website: \citeurl{mlafont}}, which is why the \Dopt{nosetfont}
+% option is provided.
 %
 % \subsubsection{Microtype}
 % \label{sec:microtype}
