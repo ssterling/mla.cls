@@ -76,7 +76,7 @@
 	url = {https://owl.purdue.edu/owl/research_and_citation/mla_style/mla_formatting_and_style_guide/mla_endnotes_and_footnotes.html}
 }
 @online{mlafont,
-	title={Why does the {MLA} require the use of {T}imes {N}ew {R}oman? It’s a boring font.}
+	title = {Why does the {MLA} require the use of {T}imes {N}ew {R}oman? It's a boring font.},
 	institution = {Modern Language Association of America},
 	howpublished = {Web},
 	urldate = {2016-02-24},
@@ -363,11 +363,13 @@
 %
 % \changes{v0.10}{2021/09/19}{Added \Dopt{nosetfont} option to disable
 % automatically loading the \Dpkg{newtxtext} package}
-% If the professor is more lenient and does not require the Times New
-% Roman font, which is not explicitly required by the \ac{MLA} format
-% either, automatic loading of the \Dpkg{newtxtext} package can be
-% disabled with the \Dopt{nosetfont} option (see section~\ref{sec:font}
-% for more information).
+% Though most professors require the \foreign{de facto} Times New Roman
+% typeface, the \ac{MLA} only requires that a font be
+% ``easily readable'' and that ``the regular type style
+% contrasts clearly with the italic''\footnote{As per the \ac{MLA} itself:
+% \citeurl{mlafont}.}.
+% The \Dopt{nosetfont} option prevents
+% automatically setting the font (see section~\ref{sec:font}).
 %    \begin{macrocode}
 \MLA@setfonttrue
 \DeclareOption{nosetfont}{\MLA@setfontfalse}
@@ -483,6 +485,9 @@
 \fi
 %    \end{macrocode}
 %
+% The \Dpkg{newtxtext} package is loaded unless the \Dopt{nosetfont}
+% option is specified.
+%
 %    \begin{macrocode}
 \ifMLA@setfont
     \RequirePackage{newtxtext}
@@ -504,24 +509,24 @@
 % \label{sec:font}
 %
 % The font size was set to 12pt when loading the \Dcls{article} class
-% in section~\ref{sec:initial_code}. Unless the \Dopt{nosetfont}
-% option was used, the \Dpkg{newtxtext} package was loaded in
-% section~\ref{sec:loading_packages}, which should be
-% metric-compatible with the infamous Times New Roman, the
-% \foreign{de facto} standard of the \ac{MLA}
-% format\footnote{According to the popular, oft-referenced \ac{OWL}:
-% \citeurl{owlmla}.}. However, the only font requirements in \ac{MLA}
-% are that it is ``easily readable'' and that ``the regular type style
-% contrasts clearly with the italic''\footnote{As per \ac{MLA}'s own
-% website: \citeurl{mlafont}}, which is why the \Dopt{nosetfont}
-% option is provided.
+% in section~\ref{sec:initial_code}.
+% 
+% The \Dpkg{newtxtext} package is loaded
+% (see section~\ref{sec:loading_packages})
+% unless specified otherwise using the \Dopt{nosetfont} option
+% (see section~\ref{sec:options}).
+% This should be metric-compatible with the infamous Times New Roman,
+% the \foreign{de facto} standard of the 
+% \ac{MLA} format\footnote{According to the popular, oft-referenced
+% \ac{OWL}: \citeurl{owlmla}.}.
+% 
 %
 % \subsubsection{Microtype}
 % \label{sec:microtype}
 %
 % The \Dpkg{microtype} package (if loaded as in
 % section~\ref{sec:loading_packages})
-% will marginally offset the burden of using Times
+% will marginally offset the burden of using Times (if used)
 % by correcting its ugly kerning and tracking.
 % The vague \Dopt{activate=false} below simply disables
 % protrusion, maintaining original line and page breaks.
